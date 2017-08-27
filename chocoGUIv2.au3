@@ -3,7 +3,7 @@
 ;*****************************************
 #AutoIt3Wrapper_icon="Color_icon_brown_v2.ico"
 #RequireAdmin
-
+Global $_ver = '0.1.1'
 #include <GUIConstantsEx.au3>
 #include "libs\_log.au3"
 #include "GUI.isf"
@@ -18,6 +18,7 @@ Opt("GUIResizeMode", 2 + 8 + 32)
 Opt("WinTitleMatchMode", 2)
 
 GUISetState(@SW_SHOW,$Gui)
+
 
 Global $Listsfolder = @ScriptDir & "\lists"
 Global $g_idListView
@@ -56,6 +57,7 @@ While 1
 		Case $B_install
 			_modal("Working...",$Gui)
 			_processLeftList($Lv_installList,'install')
+			_GUI_SeachInRepos()
 			_modal("Working...",$Gui)
 		Case $B_save	
 			if not(FileExists($Listsfolder)) Then DirCreate ( $Listsfolder )

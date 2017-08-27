@@ -13,7 +13,7 @@ Func _modal($text,$prntW)
 			Local $modL = $pPos[0] + Floor(($pPos[2] - $modWidth)/2)
 			Local $modT = $pPos[1] + Floor(($pPos[3] - $modHeight)/2)
 			
-			$GUImodal = GUICreate("modal",$modWidth,$modHeight,$modL,$modT,$WS_POPUPWINDOW,$WS_EX_TOPMOST,$prntW)
+			$GUImodal = GUICreate("modal",$modWidth,$modHeight,$modL,$modT,$WS_POPUPWINDOW,'',$prntW)
 			GUICtrlCreateLabel($text,115,38.5,80,15,-1,-1)	
 			GUISetState(@SW_DISABLE,$prntW)
 			GUISetState(@SW_SHOW,$GUImodal)

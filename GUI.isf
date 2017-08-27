@@ -7,7 +7,7 @@
 #include <GuiTab.au3>
 #include <EditConstants.au3>
 
-$GUI = GUICreate("ChocoGUI v0.1",823,498,-1,-1,BitOr($WS_MAXIMIZEBOX,$WS_MINIMIZEBOX,$WS_THICKFRAME),$WS_EX_OVERLAPPEDWINDOW)
+$GUI = GUICreate("ChocoGUI v" & $_ver,823,498,-1,-1,BitOr($WS_MAXIMIZEBOX,$WS_MINIMIZEBOX,$WS_THICKFRAME),$WS_EX_OVERLAPPEDWINDOW)
 GUISetBkColor(0xffffff,$GUI)
 $tab = GUICtrlCreatetab(0,0,2000,2000,-1,-1)
 GuiCtrlSetState(-1,2048)
@@ -80,12 +80,14 @@ GUICtrlSetBkColor(-1,"-2")
 GUICtrlSetResizing(-1,1)
 GUISwitch($GUI,_GUICtrlTab_SetCurFocus($tab,1)&GUICtrlRead ($tab, 1))
 GUICtrlCreateGroup("Software Site:",540,89,233,45,-1,-1)
+GUICtrlSetBkColor(-1,"0xffffff")
 GUICtrlSetResizing(-1,1)
 GUICtrlCreateLabel("Right click on package to get info",540,61,233,25,$SS_CENTERIMAGE,-1)
 GUICtrlSetBkColor(-1,"-2")
 GUICtrlSetResizing(-1,1)
 GUISwitch($GUI,_GUICtrlTab_SetCurFocus($tab,0)&GUICtrlRead ($tab, 1))
 GUICtrlCreateGroup("Software Site:",540,89,233,45,-1,-1)
+GUICtrlSetBkColor(-1,"0xffffff")
 GUICtrlSetResizing(-1,1)
 GUISwitch($GUI,_GUICtrlTab_SetCurFocus($tab,1)&GUICtrlRead ($tab, 1))
 $T_info2 = GUICtrlCreateEdit("",540,143,233,290,BitOr($ES_READONLY,$ES_MULTILINE),-1)
@@ -146,14 +148,14 @@ fontattribute=0
 id=tab
 func=
 bgimage=
-handle=408
+handle=407
 code=
 tabpage=-1
 iconindex=
 resize=
 textmode=text
 order=0
-[0x000122D6]
+[0x000122C0]
 order=0
 [TABPAGE3]
 page=3
@@ -173,14 +175,14 @@ handle=Tb_choc
 [gui]
 Handle_deklaration=default
 Handle_deklaration_const=false
-title=ChocoGUI v0.1
+title=ChocoGUI v & $_ver
 breite=823
 hoehe=498
 style=$WS_MAXIMIZEBOX+$WS_MINIMIZEBOX+$WS_THICKFRAME
 exstyle=$WS_EX_OVERLAPPEDWINDOW
 bgcolour=0xffffff
 bgimage=none
-handle=GUI
+handle=$GUI
 parent=
 code=
 codebeforegui=
@@ -202,8 +204,8 @@ gui_event_secoundarydown=
 gui_event_secoundaryup=
 gui_event_resized=
 gui_event_dropped=
-[0x000122DA]
-handle=409
+[0x000122C4]
+handle=408
 locked=0
 resize=1
 code=
@@ -230,8 +232,8 @@ order=3
 tabpage=0
 iconindex=
 textmode=text
-[0x000122DC]
-handle=410
+[0x000122C6]
+handle=409
 locked=0
 resize=1
 code=
@@ -258,8 +260,8 @@ order=4
 tabpage=0
 iconindex=
 textmode=text
-[0x000122DE]
-handle=411
+[0x000122C8]
+handle=410
 locked=0
 resize=1
 code=
@@ -286,8 +288,8 @@ tabpage=0
 iconindex=
 textmode=text
 order=5
-[0x000122E0]
-handle=412
+[0x000122CA]
+handle=411
 locked=0
 resize=1
 code=
@@ -314,8 +316,8 @@ order=6
 tabpage=0
 iconindex=
 textmode=text
-[0x000122E2]
-handle=413
+[0x000122CC]
+handle=412
 locked=0
 resize=1
 code=
@@ -342,8 +344,8 @@ order=7
 tabpage=0
 iconindex=
 textmode=text
-[0x000322E8]
-handle=414
+[0x000322D2]
+handle=413
 locked=0
 resize=1
 code=
@@ -370,8 +372,8 @@ order=8
 tabpage=0
 iconindex=
 textmode=text
-[0x000122EA]
-handle=415
+[0x000122D4]
+handle=414
 locked=0
 resize=1
 code=
@@ -398,8 +400,8 @@ order=9
 tabpage=0
 iconindex=
 textmode=text
-[0x000222F0]
-handle=416
+[0x000222DA]
+handle=415
 locked=0
 resize=1
 code=
@@ -426,8 +428,8 @@ order=9
 tabpage=0
 iconindex=
 textmode=text
-[0x000122F2]
-handle=417
+[0x000122DC]
+handle=416
 locked=0
 resize=1
 code=
@@ -454,8 +456,8 @@ order=10
 tabpage=0
 iconindex=
 textmode=text
-[0x000122F4]
-handle=418
+[0x000122DE]
+handle=417
 locked=0
 resize=1
 code=
@@ -482,8 +484,8 @@ order=11
 tabpage=0
 iconindex=
 textmode=text
-[0x000122F6]
-handle=419
+[0x000122E0]
+handle=418
 locked=0
 resize=1
 code=
@@ -510,8 +512,8 @@ order=12
 tabpage=0
 iconindex=
 textmode=text
-[0x000122F8]
-handle=420
+[0x000122E2]
+handle=419
 locked=0
 resize=1
 code=
@@ -538,8 +540,8 @@ order=13
 tabpage=0
 iconindex=
 textmode=text
-[0x000122FA]
-handle=421
+[0x000122E4]
+handle=420
 locked=0
 resize=1
 code=
@@ -566,8 +568,8 @@ tabpage=1
 iconindex=
 textmode=text
 order=14
-[0x00022300]
-handle=422
+[0x000222EA]
+handle=421
 locked=0
 resize=1
 code=
@@ -594,8 +596,8 @@ tabpage=1
 iconindex=
 textmode=text
 order=15
-[0x00032306]
-handle=423
+[0x000322F0]
+handle=422
 locked=0
 resize=1
 code=
@@ -622,8 +624,8 @@ tabpage=1
 iconindex=
 textmode=text
 order=16
-[0x00012308]
-handle=424
+[0x000122F2]
+handle=423
 locked=0
 resize=1
 code=
@@ -650,8 +652,8 @@ tabpage=1
 iconindex=
 textmode=text
 order=17
-[0x0001230A]
-handle=425
+[0x000122F4]
+handle=424
 locked=0
 resize=1
 code=
@@ -678,8 +680,8 @@ tabpage=1
 iconindex=
 textmode=text
 order=18
-[0x0001230C]
-handle=426
+[0x000122F6]
+handle=425
 locked=0
 resize=1
 code=
@@ -706,8 +708,8 @@ tabpage=1
 iconindex=
 textmode=text
 order=19
-[0x0001230E]
-handle=427
+[0x000122F8]
+handle=426
 locked=0
 resize=1
 code=
@@ -734,8 +736,8 @@ tabpage=1
 iconindex=
 textmode=text
 order=20
-[0x00012310]
-handle=428
+[0x000122FA]
+handle=427
 locked=0
 resize=1
 code=
@@ -762,8 +764,8 @@ order=21
 tabpage=1
 iconindex=
 textmode=text
-[0x00012312]
-handle=429
+[0x000122FC]
+handle=428
 locked=0
 resize=1
 code=
@@ -790,8 +792,8 @@ tabpage=1
 iconindex=
 textmode=text
 order=22
-[0x00012314]
-handle=430
+[0x000122FE]
+handle=429
 locked=0
 resize=1
 code=
@@ -818,8 +820,8 @@ tabpage=0
 iconindex=
 textmode=text
 order=23
-[0x00012316]
-handle=431
+[0x00012300]
+handle=430
 locked=0
 resize=1
 code=
@@ -846,8 +848,8 @@ tabpage=0
 iconindex=
 textmode=text
 order=24
-[0x00012318]
-handle=432
+[0x00012302]
+handle=431
 locked=0
 resize=1
 code=
@@ -874,8 +876,8 @@ order=25
 tabpage=0
 iconindex=
 textmode=text
-[0x0001231A]
-handle=433
+[0x00012304]
+handle=432
 locked=0
 resize=1
 code=
@@ -902,8 +904,8 @@ order=26
 tabpage=0
 iconindex=
 textmode=text
-[0x0001231C]
-handle=434
+[0x00012306]
+handle=433
 locked=0
 resize=1
 code=
@@ -930,8 +932,8 @@ order=28
 tabpage=1
 iconindex=
 textmode=text
-[0x0001231E]
-handle=435
+[0x00012308]
+handle=434
 locked=0
 resize=1
 code=
@@ -958,8 +960,8 @@ order=28
 tabpage=0
 iconindex=
 textmode=text
-[0x00012320]
-handle=436
+[0x0001230A]
+handle=435
 locked=0
 resize=1
 code=
@@ -986,8 +988,8 @@ tabpage=1
 iconindex=
 textmode=text
 order=29
-[0x00012322]
-handle=437
+[0x0001230C]
+handle=436
 locked=0
 resize=1
 code=
@@ -1014,8 +1016,8 @@ tabpage=0
 iconindex=
 textmode=text
 order=30
-[0x00012324]
-handle=438
+[0x0001230E]
+handle=437
 locked=0
 resize=1
 code=
@@ -1042,8 +1044,8 @@ tabpage=1
 iconindex=
 textmode=text
 order=31
-[0x00012326]
-handle=439
+[0x00012310]
+handle=438
 locked=0
 resize=1
 code=
@@ -1070,8 +1072,8 @@ tabpage=1
 iconindex=
 textmode=text
 order=32
-[0x00012328]
-handle=440
+[0x00012312]
+handle=439
 locked=0
 resize=1
 code=
@@ -1098,8 +1100,8 @@ tabpage=1
 iconindex=
 textmode=text
 order=33
-[0x0001232A]
-handle=441
+[0x00012314]
+handle=440
 locked=0
 resize=
 code=
@@ -1126,8 +1128,8 @@ order=34
 tabpage=2
 iconindex=
 textmode=text
-[0x0001232C]
-handle=442
+[0x00012316]
+handle=441
 locked=0
 resize=1
 code=
@@ -1154,8 +1156,8 @@ tabpage=1
 iconindex=
 textmode=text
 order=35
-[0x0001232E]
-handle=443
+[0x00012318]
+handle=442
 locked=0
 resize=1
 code=
@@ -1182,8 +1184,8 @@ tabpage=1
 iconindex=
 textmode=text
 order=36
-[0x00012330]
-handle=444
+[0x0001231A]
+handle=443
 locked=0
 resize=1
 code=
@@ -1210,8 +1212,8 @@ tabpage=1
 iconindex=
 textmode=text
 order=37
-[0x00012332]
-handle=445
+[0x0001231C]
+handle=444
 locked=0
 resize=1
 code=
@@ -1238,8 +1240,8 @@ tabpage=0
 iconindex=
 textmode=text
 order=38
-[0x00012334]
-handle=446
+[0x0001231E]
+handle=445
 locked=0
 resize=1
 code=
@@ -1266,8 +1268,8 @@ tabpage=0
 iconindex=
 textmode=text
 order=39
-[0x00012336]
-handle=447
+[0x00012320]
+handle=446
 locked=0
 resize=1
 code=
@@ -1294,8 +1296,8 @@ tabpage=2
 iconindex=
 textmode=text
 order=40
-[0x00012338]
-handle=448
+[0x00012322]
+handle=447
 locked=0
 resize=1
 code=
@@ -1322,8 +1324,8 @@ tabpage=2
 iconindex=
 textmode=text
 order=41
-[0x0001233A]
-handle=449
+[0x00012324]
+handle=448
 locked=0
 resize=1
 code=
