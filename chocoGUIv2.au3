@@ -127,8 +127,8 @@ While 1
 			_goToUrl(GUICtrlRead($L_pkURL))
 		Case $L_pkURL2
 			_goToUrl(GUICtrlRead($L_pkURL2))
-
-
+		Case $_peleaseUrl
+			_goToUrl(GUICtrlRead($_peleaseUrl))
 	EndSwitch
 WEnd
 
