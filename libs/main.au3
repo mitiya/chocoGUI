@@ -2,12 +2,12 @@
 
 #include "funcs.au3"
 
-Func _SeachInRepos($SearchStr)
+Func _SeachInRepos($SearchStr,$Notifi=true)
 	if (StringReplace($SearchStr,' ','')=='') Then
-		_SetNotifi ("ERROR." ,1)
+		if ($Notifi == true) then _SetNotifi ("ERROR." ,1)
 		Return
 	EndIf
-	_SetNotifi ("Searching 0%" ,1)
+	if ($Notifi == true) then _SetNotifi ("Searching 0%" ,1)
 	
 	local $InstListArr = _getInstalledList('',true), $aprv = '', $brk = '', $all ='', $exact = ''
 	
@@ -15,28 +15,36 @@ Func _SeachInRepos($SearchStr)
 	if (GUICtrlRead ( $CB_rbk ) == $GUI_CHECKED) Then $aprv = '--not-broken'
 	if (GUICtrlRead ( $CB_all ) == $GUI_CHECKED) Then $all = '--all'
 	if (GUICtrlRead ( $CB_exact ) == $GUI_CHECKED) Then $exact = '--exact'
+		
 	
-	Local $sOut = _runCMDgetOut('choco search ' & $SearchStr & ' ' & $aprv & ' ' & $brk  & ' ' & $all  & ' ' & $exact)	
-	_SetNotifi ("Searching 20%" ,1)
-	_log($sOut)
+	Local $schCmd = $SearchStr & ' ' & $aprv & ' ' & $brk  & ' ' & $all  & ' ' & $exact
+	Local $sOut = _cash($schCmd,$onlineSearchArr)
+	If ($sOut == 0) Then
+		_log('$sOut == 0 ' & $sOut)
+		$sOut = _runCMDgetOut('choco search ' & $schCmd)
+		_cash($schCmd,$onlineSearchArr,True,$sOut)
+	EndIf
+;~ 	Local $sOut = _runCMDgetOut('choco search ' & $schCmd)	
+	if ($Notifi == true) then _SetNotifi ("Searching 20%" ,1)
+;~ 	_log($sOut)
 	
 	Local $aOut = StringRegExp($sOut, '[^\r\n]+', 3)
-	_SetNotifi ("Searching 30%" ,1)
+	if ($Notifi == true) then _SetNotifi ("Searching 30%" ,1)
 ;~ 		_ArrayDisplay($aOut, '')
 
 	If @error Or (UBound($aOut) < 3) Then 
 		_log("err")
-		_SetNotifi ("0 packages found." ,1)
+		if ($Notifi == true) then _SetNotifi ("0 packages found." ,1)
 		Return
 	EndIf	
 		
 	if StringInStr($aOut[0], "Chocolatey") == 0 Then
-		_SetNotifi ("ERROR." ,1)
+		if ($Notifi == true) then _SetNotifi ("ERROR." ,1)
 		Return
 	EndIf
 
 	local $pkCnt = _ArraySearch($aOut, "packages found.",0, 0, 0, 1, 0, 0)	
-	_SetNotifi ("Searching 50%" ,1)
+	if ($Notifi == true) then _SetNotifi ("Searching 50%" ,1)
 	
 	For $i = 1 To ( $pkCnt - 1)
 		local $pcStr[4]
@@ -45,7 +53,7 @@ Func _SeachInRepos($SearchStr)
 		Local $pkName = $pcStr[1]
 		
 		if $pkName == "" Then
-			_SetNotifi ("ERROR." ,1)
+			if ($Notifi == true) then _SetNotifi ("ERROR." ,1)
 			Return
 		EndIf
 		_log("$pkName=" & $pkName)
@@ -69,20 +77,20 @@ Func _SeachInRepos($SearchStr)
 			if ($InstListArr[$isInstaled][1] == $pkVer) Then GUICtrlSetBkColor(-1, $cGreen) ; Geen	
 		EndIf			
 	Next	
-	_SetNotifi ("Searching 80%" ,1)	
+	if ($Notifi == true) then _SetNotifi ("Searching 80%" ,1)	
 	GUICtrlSendMsg($pkLIst, $LVM_SETCOLUMNWIDTH, 0, -1)
-	_SetNotifi ( $aOut[$pkCnt] ,1)
+	if ($Notifi == true) then _SetNotifi ( $aOut[$pkCnt] ,1)
 	$g_idListView = $pkLIst
 	GUIRegisterMsg($WM_NOTIFY, "WM_NOTIFY")
 EndFunc
 
-Func _GUI_SeachInRepos()
-	_modal("Working...",$Gui)
+Func _GUI_SeachInRepos($Notifi=true)
+	_modal(true,"Working...",$Gui)
 	_GUICtrlListView_BeginUpdate($pkLIst)
 	_GUICtrlListView_DeleteAllItems($pkLIst)
-	_SeachInRepos(GUICtrlRead($i_search))
+	_SeachInRepos(GUICtrlRead($i_search),$Notifi)
 	_GUICtrlListView_EndUpdate($pkLIst)
-	_modal("Working...",$Gui)
+	_modal(false,"Working...",$Gui)
 EndFunc
 
 Func _SearchLoacal($SearchStr='',$Notifi=true)
@@ -104,18 +112,24 @@ Func _SearchLoacal($SearchStr='',$Notifi=true)
 EndFunc
 
 Func _GUI_SearchLoacal($Notifi=true)
-	_modal("Working...",$Gui)
+	_modal(true,"Working...",$Gui)
 	_GUICtrlListView_BeginUpdate($pkInstaledLIst)
 	_GUICtrlListView_DeleteAllItems($pkInstaledLIst)
 	_SearchLoacal(GUICtrlRead($i_list),$Notifi)
 	_GUICtrlListView_EndUpdate($pkInstaledLIst)
-	_modal("Working...",$Gui)
+	_modal(false,"Working...",$Gui)
 EndFunc
 
 Func _getPkInfo($pkName)	
 	if $pkName == "" Then Return
 	
-	Local $_pkInfo = _runCMDgetOut('choco info ' & $pkName)
+	Local $_pkInfo = _cash($pkName,$pkInfoArr)
+	
+	If ($_pkInfo == 0) Then
+		$_pkInfo = _runCMDgetOut('choco info ' & $pkName)
+		_cash($pkName,$pkInfoArr,True,$_pkInfo)
+	EndIf
+	
 	Local $pkSite = StringRegExp($_pkInfo, '(Software Site:)([\s\S]*?)(\n)', 2)
 	$pkSite = StringReplace($pkSite[2],' ','')
 	_log($pkSite)
@@ -245,13 +259,13 @@ Func _chocolateyInstall()
 	switch $yes
 
 		case 6 ;YES
-			_modal("Installing chocolatey...",$Gui)
+			_modal(true,"Installing chocolatey...",$Gui)
 			Local $_cmd1 = "'https://chocolatey.org/install.ps1'"
 			Local $_cmd = @ComSpec &' /C '& '@"%SystemRoot%\System32\WindowsPowerShell\v1.0\powershell.exe" -NoProfile -InputFormat None -ExecutionPolicy Bypass -Command "iex ((New-Object System.Net.WebClient).DownloadString('&$_cmd1&'))" && SET "PATH=%PATH%;%ALLUSERSPROFILE%\chocolatey\bin"'
 			RunWait($_cmd, '', @SW_MAXIMIZE)		
 			Run(@AppDataCommonDir & '\chocolatey\choco.exe', '', @SW_MAXIMIZE)		
 			$hWnd = WinWait(".NET Framework", "", 5)
-			_modal("",$Gui)
+			_modal(false,"",$Gui)
 			_log('WinWait ' & $hWnd)
 			If $hWnd Then
 				_log('WinWait ok')

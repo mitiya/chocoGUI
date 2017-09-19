@@ -69,7 +69,7 @@ Func _Rclick($h,$index)
 	
 	Switch $fn
 		Case "info"
-			_modal("Working...",$Gui)
+			_modal(true,"Working...",$Gui)
 			Local $pkName = StringSplit (_GUICtrlListView_GetItemTextString ($h, $index),"|",2)
 			If IsArray($pkName) Then 
 					$pkName = $pkName[0]
@@ -77,7 +77,7 @@ Func _Rclick($h,$index)
 					$pkName = ""
 			EndIf		
 			_getPkInfo($pkName)
-			_modal("Working...",$Gui)
+			_modal(false,"Working...",$Gui)
 	EndSwitch
 	
 
@@ -105,3 +105,9 @@ Func _toggleElement($element)
 			GUICtrlSetState ( $element, $GUI_ENABLE )
 	EndIf		
 EndFunc
+
+Func _testButton()
+	_ArrayDisplay($onlineSearchArr, "$onlineSearchArr")
+EndFunc
+			
+			

@@ -3,7 +3,8 @@
 ;*****************************************
 #AutoIt3Wrapper_icon="Color_icon_brown_v2.ico"
 #RequireAdmin
-Global $_ver = '0.1.1'
+Global $_ver = '0.2.0'
+Global $_aboutTxt = 'chocoGUI v' & $_ver & @CR & 'ChocoGUI is a portable Gui for Chocolatey'
 #include <GUIConstantsEx.au3>
 #include "libs\_log.au3"
 #include "GUI.isf"
@@ -12,6 +13,7 @@ Global $_ver = '0.1.1'
 #include "libs\main.au3"
 
 #include "libs\modalW.au3"
+#include "libs\cash.au3"
 
 
 Opt("GUIResizeMode", 2 + 8 + 32)  
@@ -32,6 +34,8 @@ While 1
 	Switch GUIGetMsg()
 		Case $GUI_EVENT_CLOSE
 			Exit
+		Case $B_test
+			_testButton()
 			
 		Case $tab
 			_log("tab")
@@ -55,10 +59,10 @@ While 1
 			_delFromLeftList($Lv_installList)
 			_GUICtrlButton_SetFocus($Lv_installList)
 		Case $B_install
-			_modal("Working...",$Gui)
+			_modal(true,"Working...",$Gui)
 			_processLeftList($Lv_installList,'install')
-			_GUI_SeachInRepos()
-			_modal("Working...",$Gui)
+			_GUI_SeachInRepos(False)
+			_modal(false,"Working...",$Gui)
 		Case $B_save	
 			if not(FileExists($Listsfolder)) Then DirCreate ( $Listsfolder )
 			Local $svList = FileSaveDialog ( "save list", $Listsfolder, "Text files (*.txt)")
@@ -99,23 +103,23 @@ While 1
 		Case $B_delFromUnInstallList
 			_delFromLeftList( $Lv_uninstallList )	
 		Case $B_Uninstall
-			_modal("Working...",$Gui)
+			_modal(True,"Working...",$Gui)
 			_processLeftList($Lv_uninstallList,'uninstall')
 			_GUI_SearchLoacal(False)
-			_modal("Working...",$Gui)		
+			_modal(False,"Working...",$Gui)		
 		Case $B_update
-			_modal("Working...",$Gui)
+			_modal(true,"Working...",$Gui)
 			_processLeftList($Lv_uninstallList,'update')
 			_GUI_SearchLoacal(False)	
-			_modal("Working...",$Gui)	
+			_modal(False,"Working...",$Gui)	
 		Case $B_pin
 			_processLeftList($Lv_uninstallList,'pin')
 			_GUI_SearchLoacal(False)
 		Case $B_UnPin
-			_modal("Working...",$Gui)
+			_modal(True,"Working...",$Gui)
 			_processLeftList($Lv_uninstallList,'unpin')
 			_GUI_SearchLoacal(False)
-			_modal("Working...",$Gui)
+			_modal(False,"Working...",$Gui)
 		Case $B_UbdAll	
 			_RightToLeftList($pkInstaledLIst,$Lv_uninstallList,'updAll')
 		Case $L_pkURL
