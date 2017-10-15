@@ -21,7 +21,7 @@ Func _SeachInRepos($SearchStr,$Notifi=true)
 	Local $sOut = _cash($schCmd,$onlineSearchArr)
 	If ($sOut == 0) Then
 		_log('$sOut == 0 ' & $sOut)
-		$sOut = _runCMDgetOut('choco search ' & $schCmd)
+		$sOut = _runCMDgetOut('choco search ' & $schCmd,False,True,True)
 		_cash($schCmd,$onlineSearchArr,True,$sOut)
 	EndIf
 ;~ 	Local $sOut = _runCMDgetOut('choco search ' & $schCmd)	
@@ -120,7 +120,7 @@ Func _GUI_SearchLoacal($Notifi=true)
 	_modal(false,"Working...",$Gui)
 EndFunc
 
-Func _getPkInfo($pkName)	
+Func _getPkInfo($pkName)
 	if $pkName == "" Then Return
 	
 	Local $_pkInfo = _cash($pkName,$pkInfoArr)
@@ -134,8 +134,7 @@ Func _getPkInfo($pkName)
 	$pkSite = StringReplace($pkSite[2],' ','')
 	_log($pkSite)
 
-	GUICtrlSetData ( $L_pkURL, $pkSite )
-	GUICtrlSetData ( $L_pkURL2, $pkSite )
+	
 	
 	Local $_Summary = StringRegExp($_pkInfo, '(Summary)([\s\S]*?)(\n)', 2)
 	if IsArray($_Summary) == 1 Then $_Summary = $_Summary[0]
@@ -146,8 +145,19 @@ Func _getPkInfo($pkName)
 	
 	local $infStr = $pkName & @CRLF & " "& @CRLF & $_Summary & @CRLF & $_Description
 	
-	GUICtrlSetData ( $T_info, $infStr )
-	GUICtrlSetData ( $T_info2, $infStr )
+	Switch $g_idListView
+		case $pkLIst
+			GUICtrlSetData ( $L_pkURL, $pkSite )
+			GUICtrlSetData ( $T_info, $infStr )
+		case $pkInstaledLIst
+			GUICtrlSetData ( $L_pkURL2, $pkSite )
+			GUICtrlSetData ( $T_info2, $infStr )
+		case Else
+			GUICtrlSetData ( $L_pkURL, $pkSite )
+			GUICtrlSetData ( $L_pkURL2, $pkSite )
+			GUICtrlSetData ( $T_info, $infStr )
+			GUICtrlSetData ( $T_info2, $infStr )
+	EndSwitch
 EndFunc
 
 Func _RightToLeftList($Rlist,$Llist,$fn='')
@@ -176,19 +186,23 @@ EndFunc
 
 Func _processLeftList($Llist,$fn)
 	_log('_processLeftList ' & $fn)
+	Local $dOut=False
 	Switch $fn
 		Case 'install'
 			Local $_SetNotifi = "Installing... "
-			Local $cmd1 = "cinst -y --no-progress -r "
+			Local $cmd1 = "cinst -y -r "
 			local $cmd2 = true
+			$dOut=True
 		Case 'uninstall'
 			Local $_SetNotifi = "Uninstalling... "
-			Local $cmd1 = "choco uninstall -y --no-progress -r "
+			Local $cmd1 = "choco uninstall -y -r -x "
 			local $cmd2 = true
+			$dOut=True
 		Case 'update'
-			Local $_SetNotifi = "Ubdatinging... "
-			Local $cmd1 = "cup -y --no-progress -r "
+			Local $_SetNotifi = "Updating... "
+			Local $cmd1 = "cup -y -r "
 			local $cmd2 = False
+			$dOut=True
 		Case 'pin'
 			Local $_SetNotifi = "Pining... "
 			Local $cmd1 = "choco pin -r add --name "
@@ -214,7 +228,7 @@ Func _processLeftList($Llist,$fn)
 			Else
 				$cmd = $cmd1 & $pkName 
 		EndIf			
-		$out &= _runCMDgetOut($cmd)
+		$out &= _runCMDgetOut($cmd,True,True,$dOut)
 	Next
 	
 	local $Failures = UBound(StringRegExp($out, 'Failures', 3))

@@ -3,34 +3,35 @@
 ;*****************************************
 #AutoIt3Wrapper_icon="Color_icon_brown_v2.ico"
 #RequireAdmin
-Global $_ver = '0.2.0'
-Global $_aboutTxt = 'chocoGUI v' & $_ver & @CR & 'ChocoGUI is a portable Gui for Chocolatey'
-#include <GUIConstantsEx.au3>
-#include "libs\_log.au3"
-#include "GUI.isf"
-#include "libs\funcs.au3"
-#include "libs\WM_NOTIFY.au3"
-#include "libs\main.au3"
-
-#include "libs\modalW.au3"
-#include "libs\cash.au3"
-
-
 Opt("GUIResizeMode", 2 + 8 + 32)  
 Opt("WinTitleMatchMode", 2)
 
-GUISetState(@SW_SHOW,$Gui)
-
-
+Global $_ver = '0.3.0'
+Global $_aboutTxt = 'chocoGUI v' & $_ver & @CR & 'ChocoGUI is a portable Gui for Chocolatey'
 Global $Listsfolder = @ScriptDir & "\lists"
 Global $g_idListView
 Global $isTap2taped = 0
 Global $cGreen = 0xCCFFCC
-Global $cYellow = 0xFCFF4A
+Global $cYellow = 0xFCFF4A	
+	
+#include "libs\cash.au3"
+#include "GUI.isf"	
+#include <GUIConstantsEx.au3>
+#include "libs\_log.au3"
+#include "libs\funcs.au3"
+#include "libs\WM_NOTIFY.au3"
+#include "libs\main.au3"
+#include "libs\modalW.au3"
+
+Global $h_i_search = GUICtrlGetHandle($i_search)
+Global $h_i_list = GUICtrlGetHandle($i_list)
+
+GUISetState(@SW_SHOW,$Gui)
 
 _chocolateyInstall()
 
 While 1
+	
 	Switch GUIGetMsg()
 		Case $GUI_EVENT_CLOSE
 			Exit
@@ -38,18 +39,24 @@ While 1
 			_testButton()
 			
 		Case $tab
-			_log("tab")
+;~ 			_log("tab")
 			Switch GUICtrlRead($tab)
+				Case 0
+					_log("tab 0")
+					$g_idListView = $pkLIst
 				Case 1
-					_log("tab PC")
+					_log("tab 1")
+					$g_idListView = $pkInstaledLIst
 					if $isTap2taped == 0 then 
 						_GUI_SearchLoacal()
 						$isTap2taped = 1
+;~ 						_ArrayDisplay($updLstrArr, "$updLstrArr")
 					EndIf
 			EndSwitch
 				
 		Case $i_search
-			_GUI_SeachInRepos()
+			_log('$i_search')
+			If ControlGetHandle($GUI, '', '') == $h_i_search Then _GUI_SeachInRepos()
 		Case $B_search
 			_GUI_SeachInRepos()
 		Case $B_addtoInstallList
@@ -95,7 +102,7 @@ While 1
 			_GUICtrlListView_SortItems($pkInstaledLIst, GUICtrlGetState($pkInstaledLIst))
 			
 		Case $i_list
-			_GUI_SearchLoacal()		
+			If ControlGetHandle($GUI, '', '') == $h_i_list Then _GUI_SearchLoacal()		
 		Case $B_list
 			_GUI_SearchLoacal()
 		Case $B_addtoUnInstallList

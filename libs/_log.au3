@@ -9,7 +9,7 @@
 #ce ----------------------------------------------------------------------------
 
 ; Script Start - Add your code below here
-
+#include-once
 #include <GUIConstantsEx.au3>
 #include <ListBoxConstants.au3>
 

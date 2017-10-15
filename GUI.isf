@@ -165,7 +165,7 @@ iconindex=
 resize=
 textmode=text
 order=0
-[0x00041CEE]
+[0x00023A00]
 order=0
 [TABPAGE4]
 page=4
@@ -219,7 +219,7 @@ gui_event_secoundarydown=
 gui_event_secoundaryup=
 gui_event_resized=
 gui_event_dropped=
-[0x00021CDC]
+[0x000239FC]
 handle=408
 locked=0
 resize=1
@@ -247,7 +247,7 @@ order=3
 tabpage=0
 iconindex=
 textmode=text
-[0x00021CDA]
+[0x000239FA]
 handle=409
 locked=0
 resize=1
@@ -275,7 +275,7 @@ order=4
 tabpage=0
 iconindex=
 textmode=text
-[0x00021CD8]
+[0x000239F8]
 handle=410
 locked=0
 resize=1
@@ -303,7 +303,7 @@ tabpage=0
 iconindex=
 textmode=text
 order=5
-[0x00021CD6]
+[0x000239F6]
 handle=411
 locked=0
 resize=1
@@ -331,7 +331,7 @@ order=6
 tabpage=0
 iconindex=
 textmode=text
-[0x00021CD4]
+[0x000239F4]
 handle=412
 locked=0
 resize=1
@@ -359,7 +359,7 @@ order=7
 tabpage=0
 iconindex=
 textmode=text
-[0x00041CCE]
+[0x000439EE]
 handle=413
 locked=0
 resize=1
@@ -387,7 +387,7 @@ order=8
 tabpage=0
 iconindex=
 textmode=text
-[0x00021CCC]
+[0x000239EC]
 handle=414
 locked=0
 resize=1
@@ -415,7 +415,7 @@ order=9
 tabpage=0
 iconindex=
 textmode=text
-[0x00031CC6]
+[0x000339E6]
 handle=415
 locked=0
 resize=1
@@ -443,7 +443,7 @@ order=9
 tabpage=0
 iconindex=
 textmode=text
-[0x00021CC4]
+[0x000239E4]
 handle=416
 locked=0
 resize=1
@@ -471,7 +471,7 @@ order=10
 tabpage=0
 iconindex=
 textmode=text
-[0x00021CC2]
+[0x000239E2]
 handle=417
 locked=0
 resize=1
@@ -499,7 +499,7 @@ order=11
 tabpage=0
 iconindex=
 textmode=text
-[0x00021CC0]
+[0x000239E0]
 handle=418
 locked=0
 resize=1
@@ -527,7 +527,7 @@ order=12
 tabpage=0
 iconindex=
 textmode=text
-[0x00021CBE]
+[0x000239DE]
 handle=419
 locked=0
 resize=1
@@ -555,7 +555,7 @@ order=13
 tabpage=0
 iconindex=
 textmode=text
-[0x00021CBC]
+[0x000239DC]
 handle=420
 locked=0
 resize=1
@@ -583,7 +583,7 @@ tabpage=1
 iconindex=
 textmode=text
 order=14
-[0x00031CB6]
+[0x000339D6]
 handle=421
 locked=0
 resize=1
@@ -604,14 +604,14 @@ font=MS Sans Serif
 fontsize=8
 fontstyle=400
 fontattribute=0
-id=pkInstaledLIst
+id=$pkInstaledLIst
 func=
 bgimage=
 tabpage=1
 iconindex=
 textmode=text
 order=15
-[0x00041CB0]
+[0x000639D0]
 handle=422
 locked=0
 resize=1
@@ -639,7 +639,7 @@ tabpage=1
 iconindex=
 textmode=text
 order=16
-[0x00021CAE]
+[0x000339CE]
 handle=423
 locked=0
 resize=1
@@ -667,7 +667,7 @@ tabpage=1
 iconindex=
 textmode=text
 order=17
-[0x00021CAC]
+[0x000339CC]
 handle=424
 locked=0
 resize=1
@@ -695,7 +695,7 @@ tabpage=1
 iconindex=
 textmode=text
 order=18
-[0x00021CAA]
+[0x000439CA]
 handle=425
 locked=0
 resize=1
@@ -723,7 +723,7 @@ tabpage=1
 iconindex=
 textmode=text
 order=19
-[0x00041CA8]
+[0x000439C8]
 handle=426
 locked=0
 resize=1
@@ -751,7 +751,7 @@ tabpage=1
 iconindex=
 textmode=text
 order=20
-[0x00031CA2]
+[0x000339C6]
 handle=427
 locked=0
 resize=1
@@ -779,7 +779,7 @@ order=21
 tabpage=1
 iconindex=
 textmode=text
-[0x00021CA4]
+[0x000339C4]
 handle=428
 locked=0
 resize=1
@@ -807,7 +807,7 @@ tabpage=1
 iconindex=
 textmode=text
 order=22
-[0x00031CA6]
+[0x000439C2]
 handle=429
 locked=0
 resize=1
@@ -835,7 +835,7 @@ tabpage=0
 iconindex=
 textmode=text
 order=23
-[0x00021C9C]
+[0x000439C0]
 handle=430
 locked=0
 resize=1
@@ -863,7 +863,7 @@ tabpage=0
 iconindex=
 textmode=text
 order=24
-[0x00021C9E]
+[0x000339BE]
 handle=431
 locked=0
 resize=1
@@ -891,7 +891,7 @@ order=25
 tabpage=0
 iconindex=
 textmode=text
-[0x00031CA0]
+[0x000339BC]
 handle=432
 locked=0
 resize=1
@@ -919,7 +919,7 @@ order=26
 tabpage=0
 iconindex=
 textmode=text
-[0x00021C9A]
+[0x000439BA]
 handle=433
 locked=0
 resize=1
@@ -947,7 +947,7 @@ order=28
 tabpage=1
 iconindex=
 textmode=text
-[0x00021C98]
+[0x000439B8]
 handle=434
 locked=0
 resize=1
@@ -975,7 +975,7 @@ order=28
 tabpage=0
 iconindex=
 textmode=text
-[0x00021C96]
+[0x000339B6]
 handle=435
 locked=0
 resize=1
@@ -1003,7 +1003,7 @@ tabpage=1
 iconindex=
 textmode=text
 order=29
-[0x00021C94]
+[0x000339B4]
 handle=436
 locked=0
 resize=1
@@ -1031,7 +1031,7 @@ tabpage=0
 iconindex=
 textmode=text
 order=30
-[0x00031C92]
+[0x000439B2]
 handle=437
 locked=0
 resize=1
@@ -1059,7 +1059,7 @@ tabpage=1
 iconindex=
 textmode=text
 order=31
-[0x00021C8C]
+[0x000439B0]
 handle=438
 locked=0
 resize=1
@@ -1087,7 +1087,7 @@ tabpage=1
 iconindex=
 textmode=text
 order=32
-[0x00021C8E]
+[0x000339AE]
 handle=439
 locked=0
 resize=1
@@ -1115,7 +1115,7 @@ tabpage=1
 iconindex=
 textmode=text
 order=33
-[0x00031C90]
+[0x000239AC]
 handle=440
 locked=0
 resize=
@@ -1136,14 +1136,14 @@ font=MS Sans Serif
 fontsize=8
 fontstyle=400
 fontattribute=0
-id=E_consoleOut
+id=$E_consoleOut
 func=
 bgimage=
 order=34
 tabpage=2
 iconindex=
 textmode=text
-[0x00041C8A]
+[0x000239AA]
 handle=441
 locked=0
 resize=1
@@ -1171,7 +1171,7 @@ tabpage=1
 iconindex=
 textmode=text
 order=35
-[0x00021C84]
+[0x00023750]
 handle=442
 locked=0
 resize=1
@@ -1199,7 +1199,7 @@ tabpage=1
 iconindex=
 textmode=text
 order=36
-[0x00021C86]
+[0x0002374E]
 handle=443
 locked=0
 resize=1
@@ -1227,7 +1227,7 @@ tabpage=1
 iconindex=
 textmode=text
 order=37
-[0x00031C88]
+[0x0002374C]
 handle=444
 locked=0
 resize=1
@@ -1255,7 +1255,7 @@ tabpage=0
 iconindex=
 textmode=text
 order=38
-[0x00021C82]
+[0x0002374A]
 handle=445
 locked=0
 resize=1
@@ -1283,7 +1283,7 @@ tabpage=0
 iconindex=
 textmode=text
 order=39
-[0x00021C80]
+[0x00033748]
 handle=446
 locked=0
 resize=1
@@ -1311,7 +1311,7 @@ tabpage=2
 iconindex=
 textmode=text
 order=40
-[0x00021C7E]
+[0x00023746]
 handle=447
 locked=0
 resize=1
@@ -1339,7 +1339,7 @@ tabpage=2
 iconindex=
 textmode=text
 order=41
-[0x00021C7C]
+[0x0002373E]
 handle=448
 locked=0
 resize=1
@@ -1367,7 +1367,7 @@ tabpage=2
 iconindex=
 textmode=text
 order=42
-[0x00021C78]
+[0x00023740]
 handle=449
 locked=0
 resize=
@@ -1395,7 +1395,7 @@ order=43
 tabpage=-1
 iconindex=
 textmode=text
-[0x00021C76]
+[0x00033742]
 handle=450
 locked=0
 resize=1
@@ -1423,7 +1423,7 @@ tabpage=3
 iconindex=
 textmode=text
 order=44
-[0x00021C7A]
+[0x0002373C]
 handle=451
 locked=0
 resize=
