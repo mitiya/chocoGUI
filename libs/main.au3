@@ -190,7 +190,12 @@ Func _processLeftList($Llist,$fn)
 	Switch $fn
 		Case 'install'
 			Local $_SetNotifi = "Installing... "
-			Local $cmd1 = "cinst -y -r "
+			local $cmd3 = ""
+			If GUICtrlRead($CB_ignorechecksum) = 1 Then 
+				_log("--ignorechecksum")
+				$cmd3 = "--ignorechecksum "
+			EndIf
+			Local $cmd1 = ("cinst -y -r " & $cmd3)
 			local $cmd2 = true
 			$dOut=True
 		Case 'uninstall'

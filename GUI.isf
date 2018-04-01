@@ -70,7 +70,7 @@ $B_save = GUICtrlCreateButton("save",102,405,77,28,-1,-1)
 GUICtrlSetResizing(-1,1)
 $CB_all = GUICtrlCreateCheckbox("all-versions",220,28,86,20,-1,-1)
 GUICtrlSetResizing(-1,1)
-$CB_exact = GUICtrlCreateCheckbox("exact",307,28,86,20,-1,-1)
+$CB_exact = GUICtrlCreateCheckbox("exact",306,28,71,20,-1,-1)
 GUICtrlSetResizing(-1,1)
 $L_pkURL = GUICtrlCreateLabel("",550,110,210,22,-1,-1)
 GUICtrlSetFont(-1,8,400,4,"MS Sans Serif")
@@ -132,6 +132,8 @@ GUICtrlSetBkColor(-1,"-2")
 GUICtrlSetResizing(-1,1)
 GUICtrlCreateLabel($_aboutTxt,30,50,243,176,-1,-1)
 GUICtrlSetBkColor(-1,"-2")
+GUISwitch($GUI,_GUICtrlTab_SetCurFocus($tab,0)&GUICtrlRead ($tab, 1))
+$CB_ignorechecksum = GUICtrlCreateCheckbox("ignorechecksum",385,28,150,20,-1,-1)
 _GUICtrlTab_SetCurFocus($tab,0)
 
 
@@ -165,7 +167,7 @@ iconindex=
 resize=
 textmode=text
 order=0
-[0x00023A00]
+[0x0001260E]
 order=0
 [TABPAGE4]
 page=4
@@ -219,7 +221,7 @@ gui_event_secoundarydown=
 gui_event_secoundaryup=
 gui_event_resized=
 gui_event_dropped=
-[0x000239FC]
+[0x00012612]
 handle=408
 locked=0
 resize=1
@@ -247,7 +249,7 @@ order=3
 tabpage=0
 iconindex=
 textmode=text
-[0x000239FA]
+[0x00012614]
 handle=409
 locked=0
 resize=1
@@ -275,7 +277,7 @@ order=4
 tabpage=0
 iconindex=
 textmode=text
-[0x000239F8]
+[0x00012616]
 handle=410
 locked=0
 resize=1
@@ -303,7 +305,7 @@ tabpage=0
 iconindex=
 textmode=text
 order=5
-[0x000239F6]
+[0x00012618]
 handle=411
 locked=0
 resize=1
@@ -331,7 +333,7 @@ order=6
 tabpage=0
 iconindex=
 textmode=text
-[0x000239F4]
+[0x0001261A]
 handle=412
 locked=0
 resize=1
@@ -359,7 +361,7 @@ order=7
 tabpage=0
 iconindex=
 textmode=text
-[0x000439EE]
+[0x00032620]
 handle=413
 locked=0
 resize=1
@@ -387,7 +389,7 @@ order=8
 tabpage=0
 iconindex=
 textmode=text
-[0x000239EC]
+[0x00012622]
 handle=414
 locked=0
 resize=1
@@ -415,7 +417,7 @@ order=9
 tabpage=0
 iconindex=
 textmode=text
-[0x000339E6]
+[0x00022628]
 handle=415
 locked=0
 resize=1
@@ -443,7 +445,7 @@ order=9
 tabpage=0
 iconindex=
 textmode=text
-[0x000239E4]
+[0x0001262A]
 handle=416
 locked=0
 resize=1
@@ -471,7 +473,7 @@ order=10
 tabpage=0
 iconindex=
 textmode=text
-[0x000239E2]
+[0x0001262C]
 handle=417
 locked=0
 resize=1
@@ -492,14 +494,14 @@ font=MS Sans Serif
 fontsize=8
 fontstyle=400
 fontattribute=0
-id=CB_apr
+id=$CB_apr
 func=
 bgimage=
 order=11
 tabpage=0
 iconindex=
 textmode=text
-[0x000239E0]
+[0x0001262E]
 handle=418
 locked=0
 resize=1
@@ -527,7 +529,7 @@ order=12
 tabpage=0
 iconindex=
 textmode=text
-[0x000239DE]
+[0x00012630]
 handle=419
 locked=0
 resize=1
@@ -555,7 +557,7 @@ order=13
 tabpage=0
 iconindex=
 textmode=text
-[0x000239DC]
+[0x00012632]
 handle=420
 locked=0
 resize=1
@@ -583,7 +585,7 @@ tabpage=1
 iconindex=
 textmode=text
 order=14
-[0x000339D6]
+[0x00022638]
 handle=421
 locked=0
 resize=1
@@ -611,7 +613,7 @@ tabpage=1
 iconindex=
 textmode=text
 order=15
-[0x000639D0]
+[0x0003263E]
 handle=422
 locked=0
 resize=1
@@ -639,7 +641,7 @@ tabpage=1
 iconindex=
 textmode=text
 order=16
-[0x000339CE]
+[0x00012640]
 handle=423
 locked=0
 resize=1
@@ -667,7 +669,7 @@ tabpage=1
 iconindex=
 textmode=text
 order=17
-[0x000339CC]
+[0x00012642]
 handle=424
 locked=0
 resize=1
@@ -695,7 +697,7 @@ tabpage=1
 iconindex=
 textmode=text
 order=18
-[0x000439CA]
+[0x00012644]
 handle=425
 locked=0
 resize=1
@@ -723,7 +725,7 @@ tabpage=1
 iconindex=
 textmode=text
 order=19
-[0x000439C8]
+[0x00012646]
 handle=426
 locked=0
 resize=1
@@ -751,7 +753,7 @@ tabpage=1
 iconindex=
 textmode=text
 order=20
-[0x000339C6]
+[0x00012648]
 handle=427
 locked=0
 resize=1
@@ -779,7 +781,7 @@ order=21
 tabpage=1
 iconindex=
 textmode=text
-[0x000339C4]
+[0x0001264A]
 handle=428
 locked=0
 resize=1
@@ -807,7 +809,7 @@ tabpage=1
 iconindex=
 textmode=text
 order=22
-[0x000439C2]
+[0x0001264C]
 handle=429
 locked=0
 resize=1
@@ -835,7 +837,7 @@ tabpage=0
 iconindex=
 textmode=text
 order=23
-[0x000439C0]
+[0x0001264E]
 handle=430
 locked=0
 resize=1
@@ -863,7 +865,7 @@ tabpage=0
 iconindex=
 textmode=text
 order=24
-[0x000339BE]
+[0x00012650]
 handle=431
 locked=0
 resize=1
@@ -891,15 +893,15 @@ order=25
 tabpage=0
 iconindex=
 textmode=text
-[0x000339BC]
+[0x00012652]
 handle=432
 locked=0
 resize=1
 code=
 type=checkbox
-x=307
+x=306
 y=28
-width=86
+width=71
 height=20
 text=exact
 tooltip=
@@ -919,7 +921,7 @@ order=26
 tabpage=0
 iconindex=
 textmode=text
-[0x000439BA]
+[0x00012654]
 handle=433
 locked=0
 resize=1
@@ -947,7 +949,7 @@ order=28
 tabpage=1
 iconindex=
 textmode=text
-[0x000439B8]
+[0x00012656]
 handle=434
 locked=0
 resize=1
@@ -975,7 +977,7 @@ order=28
 tabpage=0
 iconindex=
 textmode=text
-[0x000339B6]
+[0x00012658]
 handle=435
 locked=0
 resize=1
@@ -1003,7 +1005,7 @@ tabpage=1
 iconindex=
 textmode=text
 order=29
-[0x000339B4]
+[0x0001265A]
 handle=436
 locked=0
 resize=1
@@ -1031,7 +1033,7 @@ tabpage=0
 iconindex=
 textmode=text
 order=30
-[0x000439B2]
+[0x0001265C]
 handle=437
 locked=0
 resize=1
@@ -1059,7 +1061,7 @@ tabpage=1
 iconindex=
 textmode=text
 order=31
-[0x000439B0]
+[0x0001265E]
 handle=438
 locked=0
 resize=1
@@ -1087,7 +1089,7 @@ tabpage=1
 iconindex=
 textmode=text
 order=32
-[0x000339AE]
+[0x00012660]
 handle=439
 locked=0
 resize=1
@@ -1115,7 +1117,7 @@ tabpage=1
 iconindex=
 textmode=text
 order=33
-[0x000239AC]
+[0x00012662]
 handle=440
 locked=0
 resize=
@@ -1143,7 +1145,7 @@ order=34
 tabpage=2
 iconindex=
 textmode=text
-[0x000239AA]
+[0x00012664]
 handle=441
 locked=0
 resize=1
@@ -1171,7 +1173,7 @@ tabpage=1
 iconindex=
 textmode=text
 order=35
-[0x00023750]
+[0x00012666]
 handle=442
 locked=0
 resize=1
@@ -1199,7 +1201,7 @@ tabpage=1
 iconindex=
 textmode=text
 order=36
-[0x0002374E]
+[0x00012668]
 handle=443
 locked=0
 resize=1
@@ -1227,7 +1229,7 @@ tabpage=1
 iconindex=
 textmode=text
 order=37
-[0x0002374C]
+[0x0001266A]
 handle=444
 locked=0
 resize=1
@@ -1255,7 +1257,7 @@ tabpage=0
 iconindex=
 textmode=text
 order=38
-[0x0002374A]
+[0x0001266C]
 handle=445
 locked=0
 resize=1
@@ -1283,7 +1285,7 @@ tabpage=0
 iconindex=
 textmode=text
 order=39
-[0x00033748]
+[0x0001266E]
 handle=446
 locked=0
 resize=1
@@ -1311,7 +1313,7 @@ tabpage=2
 iconindex=
 textmode=text
 order=40
-[0x00023746]
+[0x00012670]
 handle=447
 locked=0
 resize=1
@@ -1339,7 +1341,7 @@ tabpage=2
 iconindex=
 textmode=text
 order=41
-[0x0002373E]
+[0x00012672]
 handle=448
 locked=0
 resize=1
@@ -1367,7 +1369,7 @@ tabpage=2
 iconindex=
 textmode=text
 order=42
-[0x00023740]
+[0x00020FFE]
 handle=449
 locked=0
 resize=
@@ -1395,7 +1397,7 @@ order=43
 tabpage=-1
 iconindex=
 textmode=text
-[0x00033742]
+[0x00012674]
 handle=450
 locked=0
 resize=1
@@ -1423,7 +1425,7 @@ tabpage=3
 iconindex=
 textmode=text
 order=44
-[0x0002373C]
+[0x00012676]
 handle=451
 locked=0
 resize=
@@ -1451,4 +1453,32 @@ order=45
 tabpage=3
 iconindex=
 textmode=func
+[0x00012678]
+handle=452
+locked=0
+resize=
+code=
+type=checkbox
+x=385
+y=28
+width=150
+height=20
+text=ignorechecksum
+tooltip=
+state=$GUI_SHOW+$GUI_ENABLE
+style=
+exstyle=
+textcolour=0x000000
+bgcolour=0xF0F0F0
+font=MS Sans Serif
+fontsize=8
+fontstyle=400
+fontattribute=0
+id=$CB_ignorechecksum
+func=
+bgimage=
+order=46
+tabpage=0
+iconindex=
+textmode=text
 #ce

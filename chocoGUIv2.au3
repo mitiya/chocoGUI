@@ -1,12 +1,15 @@
+#RequireAdmin
+#Region ;**** Directives created by AutoIt3Wrapper_GUI ****
+#AutoIt3Wrapper_Icon=Color_icon_brown_v2.ico
+#AutoIt3Wrapper_UseX64=n
+#EndRegion ;**** Directives created by AutoIt3Wrapper_GUI ****
 ;*****************************************
 ;ChocoGUI by mitiya
 ;*****************************************
-#AutoIt3Wrapper_icon="Color_icon_brown_v2.ico"
-#RequireAdmin
 Opt("GUIResizeMode", 2 + 8 + 32)  
 Opt("WinTitleMatchMode", 2)
 
-Global $_ver = '0.3.0'
+Global $_ver = '0.3.1'
 Global $_aboutTxt = 'chocoGUI v' & $_ver & @CR & 'ChocoGUI is a portable Gui for Chocolatey'
 Global $Listsfolder = @ScriptDir & "\lists"
 Global $g_idListView
@@ -25,6 +28,8 @@ Global $cYellow = 0xFCFF4A
 
 Global $h_i_search = GUICtrlGetHandle($i_search)
 Global $h_i_list = GUICtrlGetHandle($i_list)
+
+GUICtrlSetState  ( $CB_ignorechecksum, $GUI_CHECKED )
 
 GUISetState(@SW_SHOW,$Gui)
 
@@ -91,6 +96,9 @@ While 1
 			_GUICtrlButton_SetFocus($B_search)
 		Case $CB_exact
 			_log("box $CB_exact")
+			_GUICtrlButton_SetFocus($B_search)
+		Case $CB_ignorechecksum
+			_log("box $CB_ignorechecksum")
 			_GUICtrlButton_SetFocus($B_search)
 			
 		Case $pkLIst
