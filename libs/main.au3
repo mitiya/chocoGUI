@@ -195,6 +195,10 @@ Func _processLeftList($Llist,$fn)
 				_log("--ignorechecksum")
 				$cmd3 = "--ignorechecksum "
 			EndIf
+			If GUICtrlRead($CB_x86) = 1 Then 
+				_log("--x86")
+				$cmd3 = $cmd3 & "--x86 "
+			EndIf
 			Local $cmd1 = ("cinst -y -r " & $cmd3)
 			local $cmd2 = true
 			$dOut=True
