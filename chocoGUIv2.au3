@@ -75,6 +75,7 @@ While 1
 			_GUICtrlButton_SetFocus($Lv_installList)
 		Case $B_install
 			_modal(true,"Working...",$Gui)
+			_log("install bt")
 			_processLeftList($Lv_installList,'install')
 			_GUI_SeachInRepos(False)
 			_modal(false,"Working...",$Gui)

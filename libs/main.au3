@@ -233,13 +233,14 @@ Func _processLeftList($Llist,$fn)
 	_SetNotifi ($_SetNotifi)
 	
 	local $Count = _GUICtrlListView_GetItemCount($Llist),$out
+;~ 	_log("$Count=" & $Count)
 	if $Count == 0 Then return
 	
 	For $i = 0 To ($Count - 1)
 		_SetNotifi ($_SetNotifi & Floor(($i * 100)/$Count) & "%")
 		Local $ItemText = StringSplit (_GUICtrlListView_GetItemTextString ($Llist, $i),"|",2)
 ;~ 		_ArrayDisplay($ItemText, '$ItemText')
-		Local $pkName = $ItemText[0], $pkVer = $ItemText[1],$cmd = ''
+		Local $pkName = ' ' & $ItemText[0], $pkVer = $ItemText[1],$cmd = ''
 ;~ 		_log($pkVer)
 		if ($cmd2 == true) And (not ($pkVer == '')) Then 
 				$cmd = $cmd1 & $pkName & ' --version=' & $pkVer
