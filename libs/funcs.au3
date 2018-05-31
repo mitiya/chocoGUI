@@ -169,8 +169,23 @@ Func _toggleElement($element)
 	EndIf		
 EndFunc
 
+Func _CmdLineCreate($cmdL, $chBox, $cmd)
+;~ 	$cmd = ' ' & $cmd
+	local $curCmd = GUICtrlRead ($cmdL)
+	if (StringInStr ( $curCmd, $cmd) = 0 And GUICtrlRead ($chBox) == $GUI_CHECKED ) Then
+			_log("add cmd")
+			$curCmd = $curCmd & ' ' & $cmd
+		Else
+			_log("rem cmd")
+			$curCmd = GUICtrlRead ($cmdL)
+			$curCmd = StringReplace ( $curCmd, $cmd, "")
+	EndIf
+	$curCmd = StringRegExpReplace($curCmd, "(^\s|\s$)", "", 0)
+	$curCmd = StringRegExpReplace($curCmd, "(\s++)", " ", 0)
+	GUICtrlSetData ( $cmdL, $curCmd)
+EndFunc
+
 Func _testButton()
 	_ArrayDisplay($onlineSearchArr, "$onlineSearchArr")
 EndFunc
-			
 			

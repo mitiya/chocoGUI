@@ -18,7 +18,7 @@ GUICtrlCreateTabItem("About")
 GUICtrlCreateTabItem("")
 _GUICtrlTab_SetCurFocus($tab,-1)
 GUISwitch($GUI,_GUICtrlTab_SetCurFocus($tab,0)&GUICtrlRead ($tab, 1))
-$i_search = GUICtrlCreateInput("",262,68,256,21,-1,$WS_EX_CLIENTEDGE)
+$i_search = GUICtrlCreateInput("",267,94,251,21,-1,$WS_EX_CLIENTEDGE)
 GUICtrlSetResizing(-1,1)
 $B_addtoInstallList = GUICtrlCreateButton("<",179,151,41,30,-1,-1)
 GUICtrlSetResizing(-1,1)
@@ -26,28 +26,28 @@ $B_delFromInstallList = GUICtrlCreateButton(">",179,189,41,30,-1,-1)
 GUICtrlSetResizing(-1,1)
 $B_install = GUICtrlCreateButton("install",20,436,159,28,-1,-1)
 GUICtrlSetResizing(-1,1)
-$pkLIst = GUICtrlCreatelistview("Name|Ver|Approved|Broken",220,94,298,337,$LVS_SORTASCENDING,BitOr($LVS_EX_CHECKBOXES,$WS_EX_CLIENTEDGE))
+$pkLIst = GUICtrlCreatelistview("Name|Ver|Approved|Broken",220,119,298,317,$LVS_SORTASCENDING,BitOr($LVS_EX_CHECKBOXES,$WS_EX_CLIENTEDGE))
 GUICtrlSetResizing(-1,1)
 $LBpkCount = GUICtrlCreateLabel("...",222,436,296,28,$SS_CENTERIMAGE,-1)
 GUICtrlSetBkColor(-1,"-2")
 GUICtrlSetResizing(-1,1)
-$T_info = GUICtrlCreateEdit("",540,143,233,290,BitOr($ES_READONLY,$ES_MULTILINE),-1)
+$T_info = GUICtrlCreateEdit("",540,189,233,244,BitOr($ES_READONLY,$ES_MULTILINE),-1)
 GUICtrlSetResizing(-1,1)
 $Lv_installList = GUICtrlCreatelistview("name|ver",20,94,159,305,BitOr($LVS_NOCOLUMNHEADER,$LVS_SINGLESEL),$WS_EX_CLIENTEDGE)
 GUICtrlSetResizing(-1,1)
 GUICtrlCreateLabel("Right click on package to get info",540,61,233,25,$SS_CENTERIMAGE,-1)
 GUICtrlSetBkColor(-1,"-2")
 GUICtrlSetResizing(-1,1)
-$CB_apr = GUICtrlCreateCheckbox("approved-only",220,47,86,21,-1,-1)
+$CB_apr = GUICtrlCreateCheckbox("approved-only",454,27,86,21,-1,-1)
 GUICtrlSetResizing(-1,1)
-$CB_rbk = GUICtrlCreateCheckbox("not-broken",306,48,71,20,$BS_VCENTER,-1)
+$CB_rbk = GUICtrlCreateCheckbox("not-broken",380,28,71,20,$BS_VCENTER,-1)
 GUICtrlSetResizing(-1,1)
-$B_search = GUICtrlCreateButton("Search:",220,68,42,21,-1,-1)
+$B_search = GUICtrlCreateButton("Search:",220,94,42,21,-1,-1)
 GUICtrlSetResizing(-1,1)
 GUISwitch($GUI,_GUICtrlTab_SetCurFocus($tab,1)&GUICtrlRead ($tab, 1))
 $Lv_uninstallList = GUICtrlCreatelistview("name|ver",20,94,159,305,BitOr($LVS_NOCOLUMNHEADER,$LVS_SINGLESEL),$WS_EX_CLIENTEDGE)
 GUICtrlSetResizing(-1,1)
-$pkInstaledLIst = GUICtrlCreatelistview("Name|Ver|Last Ver|Pined",220,94,298,337,$LVS_SORTASCENDING,BitOr($LVS_EX_CHECKBOXES,$WS_EX_CLIENTEDGE))
+$pkInstaledLIst = GUICtrlCreatelistview("Name|Ver|Last Ver|Pined",220,119,298,317,$LVS_SORTASCENDING,BitOr($LVS_EX_CHECKBOXES,$WS_EX_CLIENTEDGE))
 GUICtrlSetResizing(-1,1)
 $B_Uninstall = GUICtrlCreateButton("Uninstall",19,436,77,28,-1,-1)
 GUICtrlSetResizing(-1,1)
@@ -55,11 +55,13 @@ $B_addtoUnInstallList = GUICtrlCreateButton("<",179,151,41,30,-1,-1)
 GUICtrlSetResizing(-1,1)
 $B_delFromUnInstallList = GUICtrlCreateButton(">",179,189,41,30,-1,-1)
 GUICtrlSetResizing(-1,1)
-$i_list = GUICtrlCreateInput("",307,66,206,23,-1,$WS_EX_CLIENTEDGE)
+$i_list = GUICtrlCreateInput("",309,94,208,21,-1,$WS_EX_CLIENTEDGE)
 GUICtrlSetResizing(-1,1)
-$B_list = GUICtrlCreateButton("Search/Refresh:",222,68,85,21,-1,-1)
+$B_list = GUICtrlCreateButton("Search/Refresh:",220,94,85,21,-1,-1)
 GUICtrlSetResizing(-1,1)
 $B_update = GUICtrlCreateButton("update",20,405,77,28,-1,-1)
+GUICtrlSetColor(-1,"")
+GUICtrlSetBkColor(-1,"0xFCFF4A")
 GUICtrlSetResizing(-1,1)
 $B_pin = GUICtrlCreateButton("pin",102,405,77,28,-1,-1)
 GUICtrlSetResizing(-1,1)
@@ -78,18 +80,18 @@ GUICtrlSetColor(-1,"0x0000FF")
 GUICtrlSetBkColor(-1,"-2")
 GUICtrlSetResizing(-1,1)
 GUISwitch($GUI,_GUICtrlTab_SetCurFocus($tab,1)&GUICtrlRead ($tab, 1))
-GUICtrlCreateGroup("Software Site:",540,89,233,45,-1,-1)
+GUICtrlCreateGroup("URLs:",540,89,233,92,-1,-1)
 GUICtrlSetBkColor(-1,"0xF0F0F0")
 GUICtrlSetResizing(-1,1)
 GUICtrlCreateLabel("Right click on package to get info",540,61,233,25,$SS_CENTERIMAGE,-1)
 GUICtrlSetBkColor(-1,"-2")
 GUICtrlSetResizing(-1,1)
 GUISwitch($GUI,_GUICtrlTab_SetCurFocus($tab,0)&GUICtrlRead ($tab, 1))
-GUICtrlCreateGroup("Software Site:",540,89,233,45,$BS_FLAT,-1)
+GUICtrlCreateGroup("URLs:",540,89,233,92,$BS_FLAT,-1)
 GUICtrlSetBkColor(-1,"0xF0F0F0")
 GUICtrlSetResizing(-1,1)
 GUISwitch($GUI,_GUICtrlTab_SetCurFocus($tab,1)&GUICtrlRead ($tab, 1))
-$T_info2 = GUICtrlCreateEdit("",540,143,233,290,BitOr($ES_READONLY,$ES_MULTILINE),-1)
+$T_info2 = GUICtrlCreateEdit("",540,189,233,232,BitOr($ES_READONLY,$ES_MULTILINE),-1)
 GUICtrlSetResizing(-1,1)
 $L_pkURL2 = GUICtrlCreateLabel("",550,110,210,22,-1,-1)
 GUICtrlSetFont(-1,8,400,4,"MS Sans Serif")
@@ -133,8 +135,29 @@ GUICtrlSetResizing(-1,1)
 GUICtrlCreateLabel($_aboutTxt,30,50,243,176,-1,-1)
 GUICtrlSetBkColor(-1,"-2")
 GUISwitch($GUI,_GUICtrlTab_SetCurFocus($tab,0)&GUICtrlRead ($tab, 1))
-$CB_ignorechecksum = GUICtrlCreateCheckbox("ignorechecksum",385,28,150,20,-1,-1)
-$CB_x86 = GUICtrlCreateCheckbox("forcex86",385,48,86,20,-1,-1)
+$CB_ignorechecksum = GUICtrlCreateCheckbox("ignorechecksum",20,28,86,20,-1,-1)
+GUICtrlSetResizing(-1,1)
+$CB_x86 = GUICtrlCreateCheckbox("forcex86",112,28,86,20,-1,-1)
+GUICtrlSetResizing(-1,1)
+GUICtrlCreateCheckbox("forcex86",32300,32487,86,20,-1,-1)
+GUICtrlSetResizing(-1,1)
+$L_ChpkURL = GUICtrlCreateLabel("",550,150,210,22,-1,-1)
+GUICtrlSetFont(-1,8,400,4,"MS Sans Serif")
+GUICtrlSetColor(-1,"0x0000FF")
+GUICtrlSetBkColor(-1,"-2")
+GUICtrlSetResizing(-1,1)
+GUISwitch($GUI,_GUICtrlTab_SetCurFocus($tab,1)&GUICtrlRead ($tab, 1))
+$L_ChpkURL2 = GUICtrlCreateLabel("",550,150,210,22,-1,-1)
+GUICtrlSetFont(-1,8,400,4,"MS Sans Serif")
+GUICtrlSetColor(-1,"0x0000FF")
+GUICtrlSetBkColor(-1,"-2")
+GUICtrlSetResizing(-1,1)
+GUISwitch($GUI,_GUICtrlTab_SetCurFocus($tab,0)&GUICtrlRead ($tab, 1))
+$cmdLine1 = GUICtrlCreateInput("",220,69,298,20,-1,$WS_EX_CLIENTEDGE)
+GUICtrlSetResizing(-1,1)
+$cmdLine2 = GUICtrlCreateInput("",20,69,190,20,-1,$WS_EX_CLIENTEDGE)
+GUICtrlSetResizing(-1,1)
+$CB_allowdowngrade = GUICtrlCreateCheckbox("allowdowngrade",20,49,100,20,-1,-1)
 GUICtrlSetResizing(-1,1)
 _GUICtrlTab_SetCurFocus($tab,0)
 
@@ -169,7 +192,7 @@ iconindex=
 resize=
 textmode=text
 order=0
-[0x00012D7E]
+[0x00023B6E]
 order=0
 [TABPAGE4]
 page=4
@@ -225,15 +248,15 @@ gui_event_secoundarydown=
 gui_event_secoundaryup=
 gui_event_resized=
 gui_event_dropped=
-[0x00012D82]
+[0x00023B6A]
 handle=412
 locked=0
 resize=1
 code=
 type=input
-x=262
-y=68
-width=256
+x=267
+y=94
+width=251
 height=21
 text=
 tooltip=
@@ -246,14 +269,14 @@ font=MS Sans Serif
 fontsize=8
 fontstyle=400
 fontattribute=0
-id=i_search
+id=$i_search
 func=
 bgimage=
 order=3
 tabpage=0
 iconindex=
 textmode=text
-[0x00012D84]
+[0x00023B68]
 handle=413
 locked=0
 resize=1
@@ -281,7 +304,7 @@ order=4
 tabpage=0
 iconindex=
 textmode=text
-[0x00012D86]
+[0x00023B66]
 handle=414
 locked=0
 resize=1
@@ -309,7 +332,7 @@ tabpage=0
 iconindex=
 textmode=text
 order=5
-[0x00012D88]
+[0x00023B64]
 handle=415
 locked=0
 resize=1
@@ -337,16 +360,16 @@ order=6
 tabpage=0
 iconindex=
 textmode=text
-[0x00012D8A]
+[0x00023B62]
 handle=416
 locked=0
 resize=1
 code=
 type=listview
 x=220
-y=94
+y=119
 width=298
-height=337
+height=317
 text=Name|Ver|Approved|Broken
 tooltip=
 state=$GUI_SHOW+$GUI_ENABLE
@@ -365,7 +388,7 @@ order=7
 tabpage=0
 iconindex=
 textmode=text
-[0x00032D90]
+[0x00043B5C]
 handle=417
 locked=0
 resize=1
@@ -393,7 +416,7 @@ order=8
 tabpage=0
 iconindex=
 textmode=text
-[0x00012D92]
+[0x00023B5A]
 handle=418
 locked=0
 resize=1
@@ -421,16 +444,16 @@ order=9
 tabpage=0
 iconindex=
 textmode=text
-[0x00022D98]
+[0x00033B54]
 handle=419
 locked=0
 resize=1
 code=
 type=edit
 x=540
-y=143
+y=189
 width=233
-height=290
+height=244
 text=
 tooltip=
 state=$GUI_SHOW+$GUI_ENABLE
@@ -449,7 +472,7 @@ order=9
 tabpage=0
 iconindex=
 textmode=text
-[0x00012D9A]
+[0x00023B52]
 handle=420
 locked=0
 resize=1
@@ -477,14 +500,14 @@ order=10
 tabpage=0
 iconindex=
 textmode=text
-[0x00012D9C]
+[0x00023B50]
 handle=421
 locked=0
 resize=1
 code=
 type=checkbox
-x=220
-y=47
+x=454
+y=27
 width=86
 height=21
 text=approved-only
@@ -505,14 +528,14 @@ order=11
 tabpage=0
 iconindex=
 textmode=text
-[0x00012D9E]
+[0x00023B4E]
 handle=422
 locked=0
 resize=1
 code=
 type=checkbox
-x=306
-y=48
+x=380
+y=28
 width=71
 height=20
 text=not-broken
@@ -533,14 +556,14 @@ order=12
 tabpage=0
 iconindex=
 textmode=text
-[0x00012DA0]
+[0x00023B4C]
 handle=423
 locked=0
 resize=1
 code=
 type=button
 x=220
-y=68
+y=94
 width=42
 height=21
 text=Search:
@@ -554,14 +577,14 @@ font=MS Sans Serif
 fontsize=8
 fontstyle=400
 fontattribute=0
-id=B_search
+id=$B_search
 func=
 bgimage=
 order=13
 tabpage=0
 iconindex=
 textmode=text
-[0x00012DA2]
+[0x00023B4A]
 handle=424
 locked=0
 resize=1
@@ -589,16 +612,16 @@ tabpage=1
 iconindex=
 textmode=text
 order=14
-[0x00022DA8]
+[0x00033B44]
 handle=425
 locked=0
 resize=1
 code=
 type=listview
 x=220
-y=94
+y=119
 width=298
-height=337
+height=317
 text=Name|Ver|Last Ver|Pined
 tooltip=
 state=$GUI_SHOW+$GUI_ENABLE
@@ -617,7 +640,7 @@ tabpage=1
 iconindex=
 textmode=text
 order=15
-[0x00032DAE]
+[0x00043B3E]
 handle=426
 locked=0
 resize=1
@@ -645,7 +668,7 @@ tabpage=1
 iconindex=
 textmode=text
 order=16
-[0x00012DB0]
+[0x00023B3C]
 handle=427
 locked=0
 resize=1
@@ -673,7 +696,7 @@ tabpage=1
 iconindex=
 textmode=text
 order=17
-[0x00012DB2]
+[0x00023B3A]
 handle=428
 locked=0
 resize=1
@@ -701,16 +724,16 @@ tabpage=1
 iconindex=
 textmode=text
 order=18
-[0x00012DB4]
+[0x00023B38]
 handle=429
 locked=0
 resize=1
 code=
 type=input
-x=307
-y=66
-width=206
-height=23
+x=309
+y=94
+width=208
+height=21
 text=
 tooltip=
 state=$GUI_SHOW+$GUI_ENABLE
@@ -722,21 +745,21 @@ font=MS Sans Serif
 fontsize=8
 fontstyle=400
 fontattribute=0
-id=i_list
+id=$i_list
 func=
 bgimage=
 tabpage=1
 iconindex=
 textmode=text
 order=19
-[0x00012DB6]
+[0x00023B36]
 handle=430
 locked=0
 resize=1
 code=
 type=button
-x=222
-y=68
+x=220
+y=94
 width=85
 height=21
 text=Search/Refresh:
@@ -750,14 +773,14 @@ font=MS Sans Serif
 fontsize=8
 fontstyle=400
 fontattribute=0
-id=B_list
+id=$B_list
 func=
 bgimage=
 tabpage=1
 iconindex=
 textmode=text
 order=20
-[0x00012DB8]
+[0x00023B34]
 handle=431
 locked=0
 resize=1
@@ -772,20 +795,20 @@ tooltip=
 state=$GUI_SHOW+$GUI_ENABLE
 style=
 exstyle=
-textcolour=0x000000
-bgcolour=
+textcolour=
+bgcolour=0xFCFF4A
 font=MS Sans Serif
 fontsize=8
 fontstyle=400
 fontattribute=0
-id=B_update
+id=$B_update
 func=
 bgimage=
 order=21
 tabpage=1
 iconindex=
 textmode=text
-[0x00012DBA]
+[0x00023B32]
 handle=432
 locked=0
 resize=1
@@ -813,7 +836,7 @@ tabpage=1
 iconindex=
 textmode=text
 order=22
-[0x00012DBC]
+[0x00023B30]
 handle=433
 locked=0
 resize=1
@@ -841,7 +864,7 @@ tabpage=0
 iconindex=
 textmode=text
 order=23
-[0x00012DBE]
+[0x00023B2E]
 handle=434
 locked=0
 resize=1
@@ -869,7 +892,7 @@ tabpage=0
 iconindex=
 textmode=text
 order=24
-[0x00012DC0]
+[0x00043B2C]
 handle=435
 locked=0
 resize=1
@@ -897,7 +920,7 @@ order=25
 tabpage=0
 iconindex=
 textmode=text
-[0x00012DC2]
+[0x00033B26]
 handle=436
 locked=0
 resize=1
@@ -925,7 +948,7 @@ order=26
 tabpage=0
 iconindex=
 textmode=text
-[0x00012DC4]
+[0x00023B28]
 handle=437
 locked=0
 resize=1
@@ -934,8 +957,8 @@ type=group
 x=540
 y=89
 width=233
-height=45
-text=Software Site:
+height=92
+text=URLs:
 tooltip=
 state=$GUI_SHOW+$GUI_ENABLE
 style=
@@ -953,7 +976,7 @@ order=28
 tabpage=1
 iconindex=
 textmode=text
-[0x00012DC6]
+[0x00033B2A]
 handle=438
 locked=0
 resize=1
@@ -981,7 +1004,7 @@ order=28
 tabpage=0
 iconindex=
 textmode=text
-[0x00012DC8]
+[0x00023B20]
 handle=439
 locked=0
 resize=1
@@ -1009,7 +1032,7 @@ tabpage=1
 iconindex=
 textmode=text
 order=29
-[0x00012DCA]
+[0x00023B22]
 handle=440
 locked=0
 resize=1
@@ -1018,8 +1041,8 @@ type=group
 x=540
 y=89
 width=233
-height=45
-text=Software Site:
+height=92
+text=URLs:
 tooltip=
 state=$GUI_SHOW+$GUI_ENABLE
 style=$BS_FLAT
@@ -1037,16 +1060,16 @@ tabpage=0
 iconindex=
 textmode=text
 order=30
-[0x00012DCC]
+[0x00033B24]
 handle=441
 locked=0
 resize=1
 code=
 type=edit
 x=540
-y=143
+y=189
 width=233
-height=290
+height=232
 text=
 tooltip=
 state=$GUI_SHOW+$GUI_ENABLE
@@ -1058,14 +1081,14 @@ font=MS Sans Serif
 fontsize=8
 fontstyle=400
 fontattribute=0
-id=T_info2
+id=$T_info2
 func=
 bgimage=
 tabpage=1
 iconindex=
 textmode=text
 order=31
-[0x00012DCE]
+[0x00023B1E]
 handle=442
 locked=0
 resize=1
@@ -1093,7 +1116,7 @@ tabpage=1
 iconindex=
 textmode=text
 order=32
-[0x00012DD0]
+[0x00023B1C]
 handle=443
 locked=0
 resize=1
@@ -1121,7 +1144,7 @@ tabpage=1
 iconindex=
 textmode=text
 order=33
-[0x00012DD2]
+[0x00023B1A]
 handle=444
 locked=0
 resize=
@@ -1149,7 +1172,7 @@ order=34
 tabpage=2
 iconindex=
 textmode=text
-[0x00012DD4]
+[0x00023B18]
 handle=445
 locked=0
 resize=1
@@ -1177,7 +1200,7 @@ tabpage=1
 iconindex=
 textmode=text
 order=35
-[0x00012DD6]
+[0x00033B16]
 handle=446
 locked=0
 resize=1
@@ -1205,7 +1228,7 @@ tabpage=1
 iconindex=
 textmode=text
 order=36
-[0x00012DD8]
+[0x00023B10]
 handle=447
 locked=0
 resize=1
@@ -1226,14 +1249,14 @@ font=MS Sans Serif
 fontsize=8
 fontstyle=400
 fontattribute=0
-id=B_UbdAll
+id=$B_UbdAll
 func=
 bgimage=
 tabpage=1
 iconindex=
 textmode=text
 order=37
-[0x00012DDA]
+[0x00023B12]
 handle=448
 locked=0
 resize=1
@@ -1261,7 +1284,7 @@ tabpage=0
 iconindex=
 textmode=text
 order=38
-[0x00012DDC]
+[0x00033B14]
 handle=449
 locked=0
 resize=1
@@ -1289,7 +1312,7 @@ tabpage=0
 iconindex=
 textmode=text
 order=39
-[0x00052A16]
+[0x00043B0E]
 handle=450
 locked=0
 resize=1
@@ -1317,7 +1340,7 @@ tabpage=2
 iconindex=
 textmode=text
 order=40
-[0x00012DDE]
+[0x00023B08]
 handle=451
 locked=0
 resize=1
@@ -1345,7 +1368,7 @@ tabpage=2
 iconindex=
 textmode=text
 order=41
-[0x00012DE0]
+[0x00023B0A]
 handle=452
 locked=0
 resize=1
@@ -1373,7 +1396,7 @@ tabpage=2
 iconindex=
 textmode=text
 order=42
-[0x00012DE2]
+[0x00033B0C]
 handle=453
 locked=0
 resize=
@@ -1401,7 +1424,7 @@ order=43
 tabpage=-1
 iconindex=
 textmode=text
-[0x00012DE4]
+[0x00023B06]
 handle=454
 locked=0
 resize=1
@@ -1429,7 +1452,7 @@ tabpage=3
 iconindex=
 textmode=text
 order=44
-[0x00012DE6]
+[0x00023B04]
 handle=455
 locked=0
 resize=
@@ -1457,42 +1480,14 @@ order=45
 tabpage=3
 iconindex=
 textmode=func
-[0x00012DE8]
+[0x00023B02]
 handle=456
-locked=0
-resize=
-code=
-type=checkbox
-x=385
-y=28
-width=150
-height=20
-text=ignorechecksum
-tooltip=
-state=$GUI_SHOW+$GUI_ENABLE
-style=
-exstyle=
-textcolour=0x000000
-bgcolour=0xF0F0F0
-font=MS Sans Serif
-fontsize=8
-fontstyle=400
-fontattribute=0
-id=$CB_ignorechecksum
-func=
-bgimage=
-order=46
-tabpage=0
-iconindex=
-textmode=text
-[0x000328F2]
-handle=465
 locked=0
 resize=1
 code=
 type=checkbox
-x=385
-y=48
+x=112
+y=28
 width=86
 height=20
 text=forcex86
@@ -1513,4 +1508,200 @@ tabpage=0
 iconindex=
 textmode=text
 order=47
+[0x00023B00]
+handle=457
+locked=0
+resize=1
+code=
+type=checkbox
+x=20
+y=28
+width=86
+height=20
+text=ignorechecksum
+tooltip=
+state=$GUI_SHOW+$GUI_ENABLE
+style=
+exstyle=
+textcolour=0x000000
+bgcolour=0xF0F0F0
+font=MS Sans Serif
+fontsize=8
+fontstyle=400
+fontattribute=0
+id=$CB_ignorechecksum
+func=
+bgimage=
+tabpage=0
+iconindex=
+textmode=text
+order=47
+[0x00023AFC]
+handle=458
+locked=0
+resize=1
+code=
+type=checkbox
+x=32300
+y=32487
+width=86
+height=20
+text=forcex86
+tooltip=
+state=$GUI_SHOW+$GUI_ENABLE
+style=
+exstyle=
+textcolour=0x000000
+bgcolour=0xF0F0F0
+font=MS Sans Serif
+fontsize=8
+fontstyle=400
+fontattribute=0
+id=
+func=
+bgimage=
+tabpage=0
+iconindex=
+textmode=text
+order=48
+[0x00023AFA]
+handle=459
+locked=0
+resize=1
+code=
+type=label
+x=550
+y=150
+width=210
+height=22
+text=
+tooltip=
+state=$GUI_SHOW+$GUI_ENABLE
+style=
+exstyle=
+textcolour=0x0000FF
+bgcolour=-2
+font=MS Sans Serif
+fontsize=8
+fontstyle=400
+fontattribute=4
+id=$L_ChpkURL
+func=
+bgimage=
+tabpage=0
+iconindex=
+textmode=text
+order=49
+[0x00023AFE]
+handle=460
+locked=0
+resize=1
+code=
+type=label
+x=550
+y=150
+width=210
+height=22
+text=
+tooltip=
+state=$GUI_SHOW+$GUI_ENABLE
+style=
+exstyle=
+textcolour=0x0000FF
+bgcolour=-2
+font=MS Sans Serif
+fontsize=8
+fontstyle=400
+fontattribute=4
+id=$L_ChpkURL2
+func=
+bgimage=
+tabpage=1
+iconindex=
+textmode=text
+order=50
+[0x0002379C]
+handle=461
+locked=0
+resize=1
+code=
+type=input
+x=220
+y=69
+width=298
+height=20
+text=
+tooltip=
+state=$GUI_SHOW+$GUI_ENABLE
+style=
+exstyle=$WS_EX_CLIENTEDGE
+textcolour=0x000000
+bgcolour=
+font=MS Sans Serif
+fontsize=8
+fontstyle=400
+fontattribute=0
+id=$cmdLine1
+func=
+bgimage=
+tabpage=0
+iconindex=
+textmode=text
+order=51
+[0x00023794]
+handle=462
+locked=0
+resize=1
+code=
+type=input
+x=20
+y=69
+width=190
+height=20
+text=
+tooltip=
+state=$GUI_SHOW+$GUI_ENABLE
+style=
+exstyle=$WS_EX_CLIENTEDGE
+textcolour=0x000000
+bgcolour=
+font=MS Sans Serif
+fontsize=8
+fontstyle=400
+fontattribute=0
+id=$cmdLine2
+func=
+bgimage=
+tabpage=0
+iconindex=
+textmode=text
+order=52
+[0x00023796]
+handle=463
+locked=0
+resize=1
+code=
+type=checkbox
+x=20
+y=49
+width=100
+height=20
+text=allowdowngrade
+tooltip=
+state=$GUI_SHOW+$GUI_ENABLE
+style=
+exstyle=
+textcolour=0x000000
+bgcolour=0xF0F0F0
+font=MS Sans Serif
+fontsize=8
+fontstyle=400
+fontattribute=0
+id=$CB_allowdowngrade
+func=
+bgimage=
+tabpage=0
+iconindex=
+textmode=text
+order=53
 #ce

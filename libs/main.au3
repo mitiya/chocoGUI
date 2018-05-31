@@ -11,13 +11,15 @@ Func _SeachInRepos($SearchStr,$Notifi=true)
 	
 	local $InstListArr = _getInstalledList('',true), $aprv = '', $brk = '', $all ='', $exact = ''
 	
-	if (GUICtrlRead ( $CB_apr ) == $GUI_CHECKED) Then $aprv = '--approved-only'
-	if (GUICtrlRead ( $CB_rbk ) == $GUI_CHECKED) Then $aprv = '--not-broken'
-	if (GUICtrlRead ( $CB_all ) == $GUI_CHECKED) Then $all = '--all'
-	if (GUICtrlRead ( $CB_exact ) == $GUI_CHECKED) Then $exact = '--exact'
+;~ 	if (GUICtrlRead ( $CB_apr ) == $GUI_CHECKED) Then $aprv = '--approved-only'
+;~ 	if (GUICtrlRead ( $CB_rbk ) == $GUI_CHECKED) Then $aprv = '--not-broken'
+;~ 	if (GUICtrlRead ( $CB_all ) == $GUI_CHECKED) Then $all = '--all'
+;~ 	if (GUICtrlRead ( $CB_exact ) == $GUI_CHECKED) Then $exact = '--exact'
 		
 	
-	Local $schCmd = $SearchStr & ' ' & $aprv & ' ' & $brk  & ' ' & $all  & ' ' & $exact
+;~ 	Local $schCmd = $SearchStr & ' ' & $aprv & ' ' & $brk  & ' ' & $all  & ' ' & $exact
+	Local $schCmd = $SearchStr & ' ' & GUICtrlRead ($cmdLine1)
+	
 	Local $sOut = _cash($schCmd,$onlineSearchArr)
 	If ($sOut == 0) Then
 		_log('$sOut == 0 ' & $sOut)
@@ -133,7 +135,7 @@ Func _getPkInfo($pkName)
 	Local $pkSite = StringRegExp($_pkInfo, '(Software Site:)([\s\S]*?)(\n)', 2)
 	$pkSite = StringReplace($pkSite[2],' ','')
 	_log($pkSite)
-
+	Local $ChpkURL = 'https://chocolatey.org/packages/' & $pkName 
 	
 	
 	Local $_Summary = StringRegExp($_pkInfo, '(Summary)([\s\S]*?)(\n)', 2)
@@ -148,13 +150,17 @@ Func _getPkInfo($pkName)
 	Switch $g_idListView
 		case $pkLIst
 			GUICtrlSetData ( $L_pkURL, $pkSite )
+			GUICtrlSetData ( $L_ChpkURL, $ChpkURL )
 			GUICtrlSetData ( $T_info, $infStr )
 		case $pkInstaledLIst
 			GUICtrlSetData ( $L_pkURL2, $pkSite )
+			GUICtrlSetData ( $L_ChpkURL2, $ChpkURL )
 			GUICtrlSetData ( $T_info2, $infStr )
 		case Else
 			GUICtrlSetData ( $L_pkURL, $pkSite )
 			GUICtrlSetData ( $L_pkURL2, $pkSite )
+			GUICtrlSetData ( $L_ChpkURL, $ChpkURL )
+			GUICtrlSetData ( $L_ChpkURL2, $ChpkURL )
 			GUICtrlSetData ( $T_info, $infStr )
 			GUICtrlSetData ( $T_info2, $infStr )
 	EndSwitch
@@ -191,14 +197,17 @@ Func _processLeftList($Llist,$fn)
 		Case 'install'
 			Local $_SetNotifi = "Installing... "
 			local $cmd3 = ""
-			If GUICtrlRead($CB_ignorechecksum) = 1 Then 
-				_log("--ignorechecksum")
-				$cmd3 = "--ignorechecksum "
-			EndIf
-			If GUICtrlRead($CB_x86) = 1 Then 
-				_log("--x86")
-				$cmd3 = $cmd3 & "--x86 "
-			EndIf
+;~ 			If GUICtrlRead($CB_ignorechecksum) = 1 Then 
+;~ 				_log("--ignorechecksum")
+;~ 				$cmd3 = "--ignorechecksum "
+;~ 			EndIf
+;~ 			If GUICtrlRead($CB_x86) = 1 Then 
+;~ 				_log("--x86")
+;~ 				$cmd3 = $cmd3 & "--x86 "
+;~ 			EndIf
+			
+			$cmd3 = GUICtrlRead ($cmdLine2)
+			
 			Local $cmd1 = ("cinst -y -r " & $cmd3)
 			local $cmd2 = true
 			$dOut=True

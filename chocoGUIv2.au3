@@ -9,7 +9,7 @@
 Opt("GUIResizeMode", 2 + 8 + 32)  
 Opt("WinTitleMatchMode", 2)
 
-Global $_ver = '0.3.2'
+Global $_ver = '0.4.0'
 Global $_aboutTxt = 'chocoGUI v' & $_ver & @CR & 'ChocoGUI is a portable Gui for Chocolatey'
 Global $Listsfolder = @ScriptDir & "\lists"
 Global $g_idListView
@@ -29,7 +29,10 @@ Global $cYellow = 0xFCFF4A
 Global $h_i_search = GUICtrlGetHandle($i_search)
 Global $h_i_list = GUICtrlGetHandle($i_list)
 
-GUICtrlSetState  ( $CB_ignorechecksum, $GUI_CHECKED )
+;~ GUICtrlSetState  ( $CB_ignorechecksum, $GUI_CHECKED )
+GUICtrlSetState  ( $CB_allowdowngrade, $GUI_CHECKED )
+_CmdLineCreate($cmdLine2,$CB_allowdowngrade,'--allowdowngrade')
+
 
 GUISetState(@SW_SHOW,$Gui)
 
@@ -85,21 +88,35 @@ While 1
 			_GUICtrlButton_SetFocus($B_install)
 		Case $CB_apr
 			_log("box $CB_apr")
+			_CmdLineCreate($cmdLine1,$CB_apr,'--approved-only')
 			_GUICtrlButton_SetFocus($B_search)
 		Case $CB_rbk
 			_log("box $CB_rbk")
+			_CmdLineCreate($cmdLine1,$CB_rbk,'--not-broken')
 			_GUICtrlButton_SetFocus($B_search)
 		Case $CB_all
 			_log("box $CB_all")
+			_CmdLineCreate($cmdLine1,$CB_all,'--all')
 			_toggleElement($B_save)
 			_toggleElement($B_load)
 			_GUICtrlButton_SetFocus($B_search)
 		Case $CB_exact
 			_log("box $CB_exact")
+			_CmdLineCreate($cmdLine1,$CB_exact,'--exact')
 			_GUICtrlButton_SetFocus($B_search)
+			
 		Case $CB_ignorechecksum
 			_log("box $CB_ignorechecksum")
-			_GUICtrlButton_SetFocus($B_search)
+			_CmdLineCreate($cmdLine2,$CB_ignorechecksum,'--ignorechecksum')
+
+		Case $CB_x86
+			_log("box $CB_x86")
+			_CmdLineCreate($cmdLine2,$CB_x86,'--x86')
+			
+		Case $CB_allowdowngrade
+			_log("box $CB_allowdowngrade")
+			_CmdLineCreate($cmdLine2,$CB_allowdowngrade,'--allowdowngrade')
+
 			
 		Case $pkLIst
 			_GUICtrlListView_RegisterSortCallBack($pkLIst)			
@@ -142,8 +159,12 @@ While 1
 			_goToUrl(GUICtrlRead($L_pkURL))
 		Case $L_pkURL2
 			_goToUrl(GUICtrlRead($L_pkURL2))
+		Case $L_ChpkURL
+			_goToUrl(GUICtrlRead($L_ChpkURL))
+		Case $L_ChpkURL2
+			_goToUrl(GUICtrlRead($L_ChpkURL2))
 		Case $_peleaseUrl
-			_goToUrl(GUICtrlRead($_peleaseUrl))
+			_goToUrl(GUICtrlRead($_peleaseUrl))			
 	EndSwitch
 WEnd
 
