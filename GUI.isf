@@ -14,6 +14,7 @@ GuiCtrlSetState(-1,2048)
 $Tb_choc = GUICtrlCreateTabItem("Chocolatey")
 $Tb_Pc = GUICtrlCreateTabItem("This PC")
 GUICtrlCreateTabItem("Console info")
+$T_set = GUICtrlCreateTabItem("Settings")
 GUICtrlCreateTabItem("About")
 GUICtrlCreateTabItem("")
 _GUICtrlTab_SetCurFocus($tab,-1)
@@ -126,7 +127,7 @@ GUICtrlSetResizing(-1,1)
 GUICtrlCreateTabItem("")
 $B_test = GUICtrlCreateButton("test",720,460,100,30,-1,-1)
 GUICtrlSetState(-1,BitOr($GUI_HIDE,$GUI_ENABLE))
-GUISwitch($GUI,_GUICtrlTab_SetCurFocus($tab,3)&GUICtrlRead ($tab, 1))
+GUISwitch($GUI,_GUICtrlTab_SetCurFocus($tab,4)&GUICtrlRead ($tab, 1))
 $_peleaseUrl = GUICtrlCreateLabel("https://github.com/mitiya/chocoGUI/releases",30,94,238,22,-1,-1)
 GUICtrlSetFont(-1,8,400,4,"MS Sans Serif")
 GUICtrlSetColor(-1,"0x0000FF")
@@ -159,6 +160,12 @@ $cmdLine2 = GUICtrlCreateInput("",20,69,190,20,-1,$WS_EX_CLIENTEDGE)
 GUICtrlSetResizing(-1,1)
 $CB_allowdowngrade = GUICtrlCreateCheckbox("allowdowngrade",20,49,100,20,-1,-1)
 GUICtrlSetResizing(-1,1)
+GUISwitch($GUI,_GUICtrlTab_SetCurFocus($tab,3)&GUICtrlRead ($tab, 1))
+$CB_useRep = GUICtrlCreateCheckbox("use custom repos",20,28,111,20,-1,-1)
+GUICtrlSetResizing(-1,1)
+$I_repoList = GUICtrlCreateInput("https://chocolatey.org/api/v2;http://m-it.su/nuget/api/v2",20,58,785,121,-1,$WS_EX_CLIENTEDGE)
+$B_saveSet = GUICtrlCreateButton("save",20,436,77,28,-1,-1)
+GUICtrlSetResizing(-1,1)
 _GUICtrlTab_SetCurFocus($tab,0)
 
 
@@ -172,7 +179,7 @@ width=2000
 height=2000
 text=
 tooltip=
-pages=4
+pages=5
 state=$GUI_SHOW+$GUI_ENABLE
 style=
 exstyle=
@@ -192,13 +199,19 @@ iconindex=
 resize=
 textmode=text
 order=0
-[0x00023B6E]
+locked=0
+[0x000C0F5A]
 order=0
-[TABPAGE4]
-page=4
+[TABPAGE5]
+page=5
 text=About
 textmode=text
 handle=
+[TABPAGE4]
+page=4
+text=Settings
+textmode=text
+handle=T_set
 [TABPAGE3]
 page=3
 text=Console info
@@ -248,7 +261,7 @@ gui_event_secoundarydown=
 gui_event_secoundaryup=
 gui_event_resized=
 gui_event_dropped=
-[0x00023B6A]
+[0x000B0EB6]
 handle=412
 locked=0
 resize=1
@@ -276,7 +289,7 @@ order=3
 tabpage=0
 iconindex=
 textmode=text
-[0x00023B68]
+[0x000C0F7E]
 handle=413
 locked=0
 resize=1
@@ -304,7 +317,7 @@ order=4
 tabpage=0
 iconindex=
 textmode=text
-[0x00023B66]
+[0x000B0F62]
 handle=414
 locked=0
 resize=1
@@ -332,7 +345,7 @@ tabpage=0
 iconindex=
 textmode=text
 order=5
-[0x00023B64]
+[0x00110F8C]
 handle=415
 locked=0
 resize=1
@@ -353,14 +366,14 @@ font=MS Sans Serif
 fontsize=8
 fontstyle=400
 fontattribute=0
-id=B_install
+id=$B_install
 func=
 bgimage=
 order=6
 tabpage=0
 iconindex=
 textmode=text
-[0x00023B62]
+[0x00420F9A]
 handle=416
 locked=0
 resize=1
@@ -388,7 +401,7 @@ order=7
 tabpage=0
 iconindex=
 textmode=text
-[0x00043B5C]
+[0x00120F8A]
 handle=417
 locked=0
 resize=1
@@ -416,7 +429,7 @@ order=8
 tabpage=0
 iconindex=
 textmode=text
-[0x00023B5A]
+[0x00100F66]
 handle=418
 locked=0
 resize=1
@@ -444,7 +457,7 @@ order=9
 tabpage=0
 iconindex=
 textmode=text
-[0x00033B54]
+[0x00143636]
 handle=419
 locked=0
 resize=1
@@ -472,7 +485,7 @@ order=9
 tabpage=0
 iconindex=
 textmode=text
-[0x00023B52]
+[0x00120F84]
 handle=420
 locked=0
 resize=1
@@ -500,7 +513,7 @@ order=10
 tabpage=0
 iconindex=
 textmode=text
-[0x00023B50]
+[0x0015153C]
 handle=421
 locked=0
 resize=1
@@ -528,7 +541,7 @@ order=11
 tabpage=0
 iconindex=
 textmode=text
-[0x00023B4E]
+[0x0015152C]
 handle=422
 locked=0
 resize=1
@@ -556,7 +569,7 @@ order=12
 tabpage=0
 iconindex=
 textmode=text
-[0x00023B4C]
+[0x00121534]
 handle=423
 locked=0
 resize=1
@@ -584,7 +597,7 @@ order=13
 tabpage=0
 iconindex=
 textmode=text
-[0x00023B4A]
+[0x0012153E]
 handle=424
 locked=0
 resize=1
@@ -612,7 +625,7 @@ tabpage=1
 iconindex=
 textmode=text
 order=14
-[0x00033B44]
+[0x0015152A]
 handle=425
 locked=0
 resize=1
@@ -640,7 +653,7 @@ tabpage=1
 iconindex=
 textmode=text
 order=15
-[0x00043B3E]
+[0x00161524]
 handle=426
 locked=0
 resize=1
@@ -668,7 +681,7 @@ tabpage=1
 iconindex=
 textmode=text
 order=16
-[0x00023B3C]
+[0x0012151E]
 handle=427
 locked=0
 resize=1
@@ -696,7 +709,7 @@ tabpage=1
 iconindex=
 textmode=text
 order=17
-[0x00023B3A]
+[0x00131546]
 handle=428
 locked=0
 resize=1
@@ -724,7 +737,7 @@ tabpage=1
 iconindex=
 textmode=text
 order=18
-[0x00023B38]
+[0x00151526]
 handle=429
 locked=0
 resize=1
@@ -752,7 +765,7 @@ tabpage=1
 iconindex=
 textmode=text
 order=19
-[0x00023B36]
+[0x00181520]
 handle=430
 locked=0
 resize=1
@@ -780,7 +793,7 @@ tabpage=1
 iconindex=
 textmode=text
 order=20
-[0x00023B34]
+[0x00151532]
 handle=431
 locked=0
 resize=1
@@ -808,7 +821,7 @@ order=21
 tabpage=1
 iconindex=
 textmode=text
-[0x00023B32]
+[0x00151516]
 handle=432
 locked=0
 resize=1
@@ -836,7 +849,7 @@ tabpage=1
 iconindex=
 textmode=text
 order=22
-[0x00023B30]
+[0x00151522]
 handle=433
 locked=0
 resize=1
@@ -864,7 +877,7 @@ tabpage=0
 iconindex=
 textmode=text
 order=23
-[0x00023B2E]
+[0x0012151A]
 handle=434
 locked=0
 resize=1
@@ -885,14 +898,14 @@ font=MS Sans Serif
 fontsize=8
 fontstyle=400
 fontattribute=0
-id=B_save
+id=$B_save
 func=
 bgimage=
 tabpage=0
 iconindex=
 textmode=text
 order=24
-[0x00043B2C]
+[0x00111510]
 handle=435
 locked=0
 resize=1
@@ -920,7 +933,7 @@ order=25
 tabpage=0
 iconindex=
 textmode=text
-[0x00033B26]
+[0x001414F2]
 handle=436
 locked=0
 resize=1
@@ -948,7 +961,7 @@ order=26
 tabpage=0
 iconindex=
 textmode=text
-[0x00023B28]
+[0x0013151C]
 handle=437
 locked=0
 resize=1
@@ -976,7 +989,7 @@ order=28
 tabpage=1
 iconindex=
 textmode=text
-[0x00033B2A]
+[0x0012150E]
 handle=438
 locked=0
 resize=1
@@ -1004,7 +1017,7 @@ order=28
 tabpage=0
 iconindex=
 textmode=text
-[0x00023B20]
+[0x00121514]
 handle=439
 locked=0
 resize=1
@@ -1032,7 +1045,7 @@ tabpage=1
 iconindex=
 textmode=text
 order=29
-[0x00023B22]
+[0x00111512]
 handle=440
 locked=0
 resize=1
@@ -1060,7 +1073,7 @@ tabpage=0
 iconindex=
 textmode=text
 order=30
-[0x00033B24]
+[0x00121502]
 handle=441
 locked=0
 resize=1
@@ -1088,7 +1101,7 @@ tabpage=1
 iconindex=
 textmode=text
 order=31
-[0x00023B1E]
+[0x0011150A]
 handle=442
 locked=0
 resize=1
@@ -1116,7 +1129,7 @@ tabpage=1
 iconindex=
 textmode=text
 order=32
-[0x00023B1C]
+[0x0014150C]
 handle=443
 locked=0
 resize=1
@@ -1144,7 +1157,7 @@ tabpage=1
 iconindex=
 textmode=text
 order=33
-[0x00023B1A]
+[0x00141518]
 handle=444
 locked=0
 resize=
@@ -1172,7 +1185,7 @@ order=34
 tabpage=2
 iconindex=
 textmode=text
-[0x00023B18]
+[0x00161504]
 handle=445
 locked=0
 resize=1
@@ -1200,7 +1213,7 @@ tabpage=1
 iconindex=
 textmode=text
 order=35
-[0x00033B16]
+[0x001414FA]
 handle=446
 locked=0
 resize=1
@@ -1228,7 +1241,7 @@ tabpage=1
 iconindex=
 textmode=text
 order=36
-[0x00023B10]
+[0x0012152E]
 handle=447
 locked=0
 resize=1
@@ -1256,7 +1269,7 @@ tabpage=1
 iconindex=
 textmode=text
 order=37
-[0x00023B12]
+[0x001414FE]
 handle=448
 locked=0
 resize=1
@@ -1284,7 +1297,7 @@ tabpage=0
 iconindex=
 textmode=text
 order=38
-[0x00033B14]
+[0x00111500]
 handle=449
 locked=0
 resize=1
@@ -1312,7 +1325,7 @@ tabpage=0
 iconindex=
 textmode=text
 order=39
-[0x00043B0E]
+[0x001014F6]
 handle=450
 locked=0
 resize=1
@@ -1340,7 +1353,7 @@ tabpage=2
 iconindex=
 textmode=text
 order=40
-[0x00023B08]
+[0x001214FC]
 handle=451
 locked=0
 resize=1
@@ -1368,7 +1381,7 @@ tabpage=2
 iconindex=
 textmode=text
 order=41
-[0x00023B0A]
+[0x001014F4]
 handle=452
 locked=0
 resize=1
@@ -1396,7 +1409,7 @@ tabpage=2
 iconindex=
 textmode=text
 order=42
-[0x00033B0C]
+[0x001114D6]
 handle=453
 locked=0
 resize=
@@ -1424,7 +1437,7 @@ order=43
 tabpage=-1
 iconindex=
 textmode=text
-[0x00023B06]
+[0x001214EE]
 handle=454
 locked=0
 resize=1
@@ -1448,11 +1461,11 @@ fontattribute=4
 id=$_peleaseUrl
 func=
 bgimage=
-tabpage=3
+tabpage=4
 iconindex=
 textmode=text
 order=44
-[0x00023B04]
+[0x00722702]
 handle=455
 locked=0
 resize=
@@ -1477,10 +1490,10 @@ id=
 func=
 bgimage=
 order=45
-tabpage=3
+tabpage=4
 iconindex=
 textmode=func
-[0x00023B02]
+[0x00090F2E]
 handle=456
 locked=0
 resize=1
@@ -1508,7 +1521,7 @@ tabpage=0
 iconindex=
 textmode=text
 order=47
-[0x00023B00]
+[0x00090F34]
 handle=457
 locked=0
 resize=1
@@ -1536,7 +1549,7 @@ tabpage=0
 iconindex=
 textmode=text
 order=47
-[0x00023AFC]
+[0x00090F36]
 handle=458
 locked=0
 resize=1
@@ -1564,7 +1577,7 @@ tabpage=0
 iconindex=
 textmode=text
 order=48
-[0x00023AFA]
+[0x00090F38]
 handle=459
 locked=0
 resize=1
@@ -1592,7 +1605,7 @@ tabpage=0
 iconindex=
 textmode=text
 order=49
-[0x00023AFE]
+[0x000B0F2C]
 handle=460
 locked=0
 resize=1
@@ -1620,7 +1633,7 @@ tabpage=1
 iconindex=
 textmode=text
 order=50
-[0x0002379C]
+[0x00090F4C]
 handle=461
 locked=0
 resize=1
@@ -1648,7 +1661,7 @@ tabpage=0
 iconindex=
 textmode=text
 order=51
-[0x00023794]
+[0x00090F22]
 handle=462
 locked=0
 resize=1
@@ -1676,7 +1689,7 @@ tabpage=0
 iconindex=
 textmode=text
 order=52
-[0x00023796]
+[0x00090F40]
 handle=463
 locked=0
 resize=1
@@ -1704,4 +1717,88 @@ tabpage=0
 iconindex=
 textmode=text
 order=53
+[0x000A0F56]
+handle=464
+locked=0
+resize=1
+code=
+type=checkbox
+x=20
+y=28
+width=111
+height=20
+text=use custom repos
+tooltip=
+state=$GUI_SHOW+$GUI_ENABLE
+style=
+exstyle=
+textcolour=0x000000
+bgcolour=0xF0F0F0
+font=MS Sans Serif
+fontsize=8
+fontstyle=400
+fontattribute=0
+id=$CB_useRep
+func=
+bgimage=
+tabpage=3
+iconindex=
+textmode=text
+order=54
+[0x00090F46]
+handle=465
+locked=0
+resize=
+code=
+type=input
+x=20
+y=58
+width=785
+height=121
+text=https://chocolatey.org/api/v2;http://m-it.su/nuget/api/v2
+tooltip=
+state=$GUI_SHOW+$GUI_ENABLE
+style=
+exstyle=$WS_EX_CLIENTEDGE
+textcolour=0x000000
+bgcolour=
+font=MS Sans Serif
+fontsize=8
+fontstyle=400
+fontattribute=0
+id=$I_repoList
+func=
+bgimage=
+order=55
+tabpage=3
+iconindex=
+textmode=text
+[0x00630FDE]
+handle=466
+locked=0
+resize=1
+code=
+type=button
+x=20
+y=436
+width=77
+height=28
+text=save
+tooltip=
+state=$GUI_SHOW+$GUI_ENABLE
+style=
+exstyle=
+textcolour=0x000000
+bgcolour=
+font=MS Sans Serif
+fontsize=8
+fontstyle=400
+fontattribute=0
+id=$B_saveSet
+func=
+bgimage=
+tabpage=3
+iconindex=
+textmode=text
+order=56
 #ce

@@ -64,7 +64,7 @@ EndFunc
 Func _getInstalledList($SearchStr="",$fast=False)
 	Local $hTimer = TimerInit() 
 	if ($fast == True) then 
-			Local $_localstr = _runCMDgetOut('choco list -r -l ' & $SearchStr,False)
+			Local $_localstr = _runCMDgetOut('choco list -r -l ' & $SearchStr,False,True,True)
 		Else
 			if $SearchStr=="" then $SearchStr="all"
 ;~ 			Local $_localstr = _runCMDgetOut('cup --noop -r ' & $SearchStr,False,True,True)
@@ -82,14 +82,20 @@ EndFunc
 
 Func _getUpdList()
 	
-	if $isTap2taped == 0 then 
-		local $_updLs = _runCMDgetOut('cup --noop -r all',False,True,True)
+	local $cmd2 = ''
+	if (GUICtrlRead ( $CB_useRep ) == $GUI_CHECKED) Then
+		$cmd2 = ' -s ' & GUICtrlRead ($I_repoList) & ' '
+	EndIf
+	
+	if $isUpdListGeted == 0 then 
+		local $_updLs = _runCMDgetOut('cup --noop -r all' & $cmd2,False,True,True)
 		Local $_updLsArr = _CSVSplit($_updLs,"|")
 ;~ 		_ArrayDisplay($_updLsArr, "$_updLsArr")
 		for $i=0 to (UBound($_updLsArr)-1)
 			_cash($_updLsArr[$i][0],$updLstrArr,True,$_updLsArr[$i][0] & '|' & $_updLsArr[$i][1] & '|' & $_updLsArr[$i][2] & '|' & $_updLsArr[$i][3])
 		Next
 ;~ 		_ArrayDisplay($updLstrArr, "$updLstrArr")
+		$isUpdListGeted = 1
 		return $_updLs
 	EndIf
 	
@@ -106,7 +112,7 @@ Func _getUpdList()
 		Local $_updLstr = _cash($pkName,$updLstrArr)
 		
 		If ($_updLstr == 0) Then
-			$_updLstr = _runCMDgetOut('cup --noop -r ' & $pkName,False)
+			$_updLstr = _runCMDgetOut('cup --noop -r ' & $cmd2 & $pkName,False)
 			Local $tmpArr = StringRegExp ( $_updLstr, "(.*)(\|.*)" , 2)
 			$_updLstr = $tmpArr[0]	
 			_cash($pkName,$updLstrArr,True,$_updLstr)
@@ -147,7 +153,7 @@ Func _Rclick($h,$index)
 EndFunc
 
 Func _goToUrl($url)
-	ShellExecute($url)
+	if not ($url == '') then ShellExecute($url)
 EndFunc
 
 Func _lvItem_textSearch($hListView,$sText)
@@ -183,6 +189,30 @@ Func _CmdLineCreate($cmdL, $chBox, $cmd)
 	$curCmd = StringRegExpReplace($curCmd, "(^\s|\s$)", "", 0)
 	$curCmd = StringRegExpReplace($curCmd, "(\s++)", " ", 0)
 	GUICtrlSetData ( $cmdL, $curCmd)
+EndFunc
+
+Func _SaveSettings()
+	_log('$GUI_CHECKED=' & $GUI_CHECKED)
+	_log('$CB_useRep=' & GUICtrlRead  ($CB_useRep))	
+	if (GUICtrlRead ( $CB_useRep ) == $GUI_CHECKED) Then
+			IniWrite ( $inifile, "repos", "use", True )
+		Else
+			IniWrite ( $inifile, "repos", "use", False )
+	EndIf
+	IniWrite ( $inifile, "repos", "RepoList", GUICtrlRead ($I_repoList) )
+EndFunc
+
+Func _GuiToggle($state)
+	Switch $state
+		Case $GUI_CHECKED
+			Return $GUI_UNCHECKED
+		Case $GUI_UNCHECKED
+			Return $GUI_CHECKED
+		Case $GUI_ENABLE
+			Return $GUI_DISABLE 
+		Case $GUI_DISABLE
+			Return $GUI_ENABLE 
+	EndSwitch
 EndFunc
 
 Func _testButton()

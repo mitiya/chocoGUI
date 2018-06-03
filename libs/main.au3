@@ -113,34 +113,71 @@ Func _SearchLoacal($SearchStr='',$Notifi=true)
 	if ($Notifi == true) then _SetNotifi (UBound($InstListArr) & " packages found." ,2)
 EndFunc
 
-Func _GUI_SearchLoacal($Notifi=true)
+Func _SearchLoacalSimply($SearchStr='',$Notifi=true)
+	_log('_SearchLoacalSimply')
+	if ($Notifi == true) then _SetNotifi ("Searching 0%" ,2)	
+	local $InstListArr = _getInstalledList($SearchStr,True)
+	if not IsArray ( $InstListArr ) Then Return
+;~ 	_ArrayDisplay($InstListArr, '$InstListArr')
+	For $i=0 to (UBound($InstListArr)-1)
+		local $sFill = $InstListArr[$i][0] &"|"& $InstListArr[$i][1]
+		GUICtrlCreateListViewItem($sFill, $pkInstaledLIst)
+	Next
+	
+	GUICtrlSendMsg($pkInstaledLIst, $LVM_SETCOLUMNWIDTH, 0, -1)
+	$g_idListView = $pkInstaledLIst
+	GUIRegisterMsg($WM_NOTIFY, "WM_NOTIFY")
+	if ($Notifi == true) then _SetNotifi (UBound($InstListArr) & " packages found." ,2)
+EndFunc
+
+Func _GUI_SearchLoacal($Simply=false,$Notifi=true)
+	Local $hTimer = TimerInit() 
 	_modal(true,"Working...",$Gui)
 	_GUICtrlListView_BeginUpdate($pkInstaledLIst)
 	_GUICtrlListView_DeleteAllItems($pkInstaledLIst)
-	_SearchLoacal(GUICtrlRead($i_list),$Notifi)
+	if $Simply== True Then
+			_SearchLoacalSimply(GUICtrlRead($i_list),$Notifi)
+		Else
+			_SearchLoacal(GUICtrlRead($i_list),$Notifi)
+	EndIf
+	
 	_GUICtrlListView_EndUpdate($pkInstaledLIst)
 	_modal(false,"Working...",$Gui)
+	_log('TimerDiff GUI_SearchLoacal=' & TimerDiff($hTimer))
 EndFunc
 
-Func _getPkInfo($pkName)
+Func _getPkInfo($pkName,$localInfo = False)
+	Local $pkSite = ''
+	Local $_Summary = ''
+	Local $_Description = ''
+	Local $ChpkURL = ''
+	
 	if $pkName == "" Then Return
 	
 	Local $_pkInfo = _cash($pkName,$pkInfoArr)
 	
 	If ($_pkInfo == 0) Then
 		$_pkInfo = _runCMDgetOut('choco info ' & $pkName)
+		_log("$_pkInfo=" & $_pkInfo)
+		if not (StringInStr ( $_pkInfo, "0 packages") = 0 ) Then
+			$_pkInfo = _runCMDgetOut('choco info -l ' & $pkName)
+			$ChpkURL = False
+		EndIf
 		_cash($pkName,$pkInfoArr,True,$_pkInfo)
 	EndIf
 	
-	Local $pkSite = StringRegExp($_pkInfo, '(Software Site:)([\s\S]*?)(\n)', 2)
-	$pkSite = StringReplace($pkSite[2],' ','')
+	$pkSite = StringRegExp($_pkInfo, '(Software Site:)([\s\S]*?)(\n)', 2)
+	
+;~ 	_ArrayDisplay($pkSite, '')
+	if IsArray($pkSite) == 1 Then $pkSite = StringReplace($pkSite[2],' ','')
+	_log($pkSite)	
+	$pkSite = StringReplace($pkSite,' ','')
 	_log($pkSite)
-	Local $ChpkURL = 'https://chocolatey.org/packages/' & $pkName 
-	
-	
-	Local $_Summary = StringRegExp($_pkInfo, '(Summary)([\s\S]*?)(\n)', 2)
+	if not $ChpkURL == false Then $ChpkURL = 'https://chocolatey.org/packages/' & $pkName 
+
+	$_Summary = StringRegExp($_pkInfo, '(Summary)([\s\S]*?)(\n)', 2)
 	if IsArray($_Summary) == 1 Then $_Summary = $_Summary[0]
-	Local $_Description = StringRegExp($_pkInfo, '(Description)([\s\S]*?)(\n)', 2)
+	$_Description = StringRegExp($_pkInfo, '(Description)([\s\S]*?)(\n)', 2)
 	if IsArray($_Description) == 1 Then $_Description = $_Description[0]
 	_log($_Summary)
 	_log($_Description)
@@ -150,17 +187,21 @@ Func _getPkInfo($pkName)
 	Switch $g_idListView
 		case $pkLIst
 			GUICtrlSetData ( $L_pkURL, $pkSite )
-			GUICtrlSetData ( $L_ChpkURL, $ChpkURL )
+			GUICtrlSetData ( $L_ChpkURL, '' )
+			if not $ChpkURL == false Then GUICtrlSetData ( $L_ChpkURL, $ChpkURL )
 			GUICtrlSetData ( $T_info, $infStr )
 		case $pkInstaledLIst
 			GUICtrlSetData ( $L_pkURL2, $pkSite )
-			GUICtrlSetData ( $L_ChpkURL2, $ChpkURL )
+			GUICtrlSetData ( $L_ChpkURL2, '' )
+			if not $ChpkURL == false Then GUICtrlSetData ( $L_ChpkURL2, $ChpkURL )
 			GUICtrlSetData ( $T_info2, $infStr )
 		case Else
 			GUICtrlSetData ( $L_pkURL, $pkSite )
 			GUICtrlSetData ( $L_pkURL2, $pkSite )
-			GUICtrlSetData ( $L_ChpkURL, $ChpkURL )
-			GUICtrlSetData ( $L_ChpkURL2, $ChpkURL )
+			GUICtrlSetData ( $L_ChpkURL, '' )
+			if not $ChpkURL == false Then GUICtrlSetData ( $L_ChpkURL, $ChpkURL )
+			GUICtrlSetData ( $L_ChpkURL2, '' )	
+			if not $ChpkURL == false Then GUICtrlSetData ( $L_ChpkURL2, $ChpkURL )
 			GUICtrlSetData ( $T_info, $infStr )
 			GUICtrlSetData ( $T_info2, $infStr )
 	EndSwitch

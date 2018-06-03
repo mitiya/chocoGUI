@@ -9,13 +9,15 @@
 Opt("GUIResizeMode", 2 + 8 + 32)  
 Opt("WinTitleMatchMode", 2)
 
-Global $_ver = '0.4.0'
+Global $_ver = '0.4.1'
 Global $_aboutTxt = 'chocoGUI v' & $_ver & @CR & 'ChocoGUI is a portable Gui for Chocolatey'
 Global $Listsfolder = @ScriptDir & "\lists"
 Global $g_idListView
 Global $isTap2taped = 0
+Global $isUpdListGeted = 0
 Global $cGreen = 0xCCFFCC
 Global $cYellow = 0xFCFF4A	
+global $inifile = @ScriptDir & "\settings.ini"
 	
 #include "libs\cash.au3"
 #include "GUI.isf"	
@@ -28,6 +30,21 @@ Global $cYellow = 0xFCFF4A
 
 Global $h_i_search = GUICtrlGetHandle($i_search)
 Global $h_i_list = GUICtrlGetHandle($i_list)
+
+;~ ini reads
+Global $UseCReps = IniRead ( $inifile, "repos", "use",False)
+GUICtrlSetData ( $I_repoList, IniRead ( $inifile, "repos", "RepoList","https://chocolatey.org/api/v2;http://m-it.su/nuget/api/v2"))
+if $UseCReps == True Then 
+		GUICtrlSetState  ( $CB_useRep, $GUI_CHECKED )
+		GUICtrlSetState  ( $I_repoList, $GUI_ENABLE )
+		_CmdLineCreate($cmdLine1,$CB_useRep,'-s ' & GUICtrlRead ($I_repoList))
+		_CmdLineCreate($cmdLine2,$CB_useRep,'-s ' & GUICtrlRead ($I_repoList))
+	Else
+		GUICtrlSetState  ( $CB_useRep, $GUI_UNCHECKED )
+		GUICtrlSetState  ( $I_repoList, $GUI_DISABLE )
+EndIf
+
+
 
 ;~ GUICtrlSetState  ( $CB_ignorechecksum, $GUI_CHECKED )
 GUICtrlSetState  ( $CB_allowdowngrade, $GUI_CHECKED )
@@ -56,7 +73,7 @@ While 1
 					_log("tab 1")
 					$g_idListView = $pkInstaledLIst
 					if $isTap2taped == 0 then 
-						_GUI_SearchLoacal()
+						_GUI_SearchLoacal(True)
 						$isTap2taped = 1
 ;~ 						_ArrayDisplay($updLstrArr, "$updLstrArr")
 					EndIf
@@ -117,7 +134,12 @@ While 1
 		Case $CB_allowdowngrade
 			_log("box $CB_allowdowngrade")
 			_CmdLineCreate($cmdLine2,$CB_allowdowngrade,'--allowdowngrade')
-
+			
+		Case $CB_useRep
+			_log("box $CB_useRep")
+			_CmdLineCreate($cmdLine1,$CB_useRep,'-s ' & GUICtrlRead ($I_repoList))
+			_CmdLineCreate($cmdLine2,$CB_useRep,'-s ' & GUICtrlRead ($I_repoList))
+			GUICtrlSetState  ( $I_repoList, _GuiToggle(GUICtrlGetState($I_repoList) - $GUI_SHOW) )
 			
 		Case $pkLIst
 			_GUICtrlListView_RegisterSortCallBack($pkLIst)			
@@ -165,7 +187,11 @@ While 1
 		Case $L_ChpkURL2
 			_goToUrl(GUICtrlRead($L_ChpkURL2))
 		Case $_peleaseUrl
-			_goToUrl(GUICtrlRead($_peleaseUrl))			
+			_goToUrl(GUICtrlRead($_peleaseUrl))	
+		Case $B_saveSet
+			_SaveSettings()
+			
+					
 	EndSwitch
 WEnd
 
