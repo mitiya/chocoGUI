@@ -113,10 +113,10 @@ Func _SearchLoacal($SearchStr='',$Notifi=true)
 	if ($Notifi == true) then _SetNotifi (UBound($InstListArr) & " packages found." ,2)
 EndFunc
 
-Func _SearchLoacalSimply($SearchStr='',$Notifi=true)
+Func _SearchLoacalSimply($SearchStr='',$Notifi=true,$dynOut=False)
 	_log('_SearchLoacalSimply')
 	if ($Notifi == true) then _SetNotifi ("Searching 0%" ,2)	
-	local $InstListArr = _getInstalledList($SearchStr,True)
+	local $InstListArr = _getInstalledList($SearchStr,True,$dynOut)
 	if not IsArray ( $InstListArr ) Then Return
 ;~ 	_ArrayDisplay($InstListArr, '$InstListArr')
 	For $i=0 to (UBound($InstListArr)-1)
@@ -130,13 +130,13 @@ Func _SearchLoacalSimply($SearchStr='',$Notifi=true)
 	if ($Notifi == true) then _SetNotifi (UBound($InstListArr) & " packages found." ,2)
 EndFunc
 
-Func _GUI_SearchLoacal($Simply=false,$Notifi=true)
+Func _GUI_SearchLoacal($Simply=false,$Notifi=true,$dynOut=False)
 	Local $hTimer = TimerInit() 
 	_modal(true,"Working...",$Gui)
 	_GUICtrlListView_BeginUpdate($pkInstaledLIst)
 	_GUICtrlListView_DeleteAllItems($pkInstaledLIst)
 	if $Simply== True Then
-			_SearchLoacalSimply(GUICtrlRead($i_list),$Notifi)
+			_SearchLoacalSimply(GUICtrlRead($i_list),$Notifi,$dynOut)
 		Else
 			_SearchLoacal(GUICtrlRead($i_list),$Notifi)
 	EndIf
@@ -296,6 +296,8 @@ Func _processLeftList($Llist,$fn)
 	GUICtrlSetTip($LBpkCount, $out)	
 	GUICtrlSetData ( $E_consoleOut, $out )
 	_GUICtrlListView_DeleteAllItems ( $Llist )	
+	_GUI_SearchLoacal(True,True,True)
+	$isTap2taped = 1
 EndFunc
 
 Func _saveList($hFile)

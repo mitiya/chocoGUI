@@ -21,6 +21,16 @@ Func _SetNotifi ($str,$LB=3)
 	EndSwitch
 EndFunc
 
+
+
+; #FUNCTION# ====================================================================================================================
+; Name...........: _runCMDgetOut
+; Parameters ....: $_cmd     		- команда для исполнения
+;                  $consoleOut      - вывод результата в окно консольного лога
+;                  $IShide    		- скрывать окно исполняемой команды (именно самой команды типа cmd.exe)
+;                  $dynOut 			- выводить консольный вывод впроцессе исполнеия в спецальное окно
+; ===============================================================================================================================
+
 Func _runCMDgetOut($_cmd,$consoleOut = true,$IShide = True,$dynOut=false)
 	_log("_runCMDgetOut cmd=" & $_cmd)
 	Local $delay=100
@@ -61,10 +71,12 @@ Func _runCMDgetOut($_cmd,$consoleOut = true,$IShide = True,$dynOut=false)
 	Return $sOut
 EndFunc
 
-Func _getInstalledList($SearchStr="",$fast=False)
+; ===============================================================================================================================
+
+Func _getInstalledList($SearchStr="",$fast=False,$dynOut=False)
 	Local $hTimer = TimerInit() 
 	if ($fast == True) then 
-			Local $_localstr = _runCMDgetOut('choco list -r -l ' & $SearchStr,False,True,True)
+			Local $_localstr = _runCMDgetOut('choco list -r -l ' & $SearchStr,False,True,$dynOut)
 		Else
 			if $SearchStr=="" then $SearchStr="all"
 ;~ 			Local $_localstr = _runCMDgetOut('cup --noop -r ' & $SearchStr,False,True,True)
@@ -216,6 +228,6 @@ Func _GuiToggle($state)
 EndFunc
 
 Func _testButton()
-	_ArrayDisplay($onlineSearchArr, "$onlineSearchArr")
+	_runCMDgetOut('choco list -r -l ',True,True,True)
 EndFunc
 			

@@ -9,7 +9,7 @@
 Opt("GUIResizeMode", 2 + 8 + 32)  
 Opt("WinTitleMatchMode", 2)
 
-Global $_ver = '0.4.1'
+Global $_ver = '0.4.2'
 Global $_aboutTxt = 'chocoGUI v' & $_ver & @CR & 'ChocoGUI is a portable Gui for Chocolatey'
 Global $Listsfolder = @ScriptDir & "\lists"
 Global $g_idListView
@@ -50,6 +50,8 @@ EndIf
 GUICtrlSetState  ( $CB_allowdowngrade, $GUI_CHECKED )
 _CmdLineCreate($cmdLine2,$CB_allowdowngrade,'--allowdowngrade')
 
+;~ test button
+;~ GUICtrlSetState  ( $B_test, $GUI_SHOW+$GUI_ENABLE )
 
 GUISetState(@SW_SHOW,$Gui)
 
@@ -73,7 +75,7 @@ While 1
 					_log("tab 1")
 					$g_idListView = $pkInstaledLIst
 					if $isTap2taped == 0 then 
-						_GUI_SearchLoacal(True)
+						_GUI_SearchLoacal(True,True,True)
 						$isTap2taped = 1
 ;~ 						_ArrayDisplay($updLstrArr, "$updLstrArr")
 					EndIf
@@ -160,20 +162,20 @@ While 1
 		Case $B_Uninstall
 			_modal(True,"Working...",$Gui)
 			_processLeftList($Lv_uninstallList,'uninstall')
-			_GUI_SearchLoacal(False)
+;~ 			_GUI_SearchLoacal(False)
 			_modal(False,"Working...",$Gui)		
 		Case $B_update
 			_modal(true,"Working...",$Gui)
 			_processLeftList($Lv_uninstallList,'update')
-			_GUI_SearchLoacal(False)	
+;~ 			_GUI_SearchLoacal(False)	
 			_modal(False,"Working...",$Gui)	
 		Case $B_pin
 			_processLeftList($Lv_uninstallList,'pin')
-			_GUI_SearchLoacal(False)
+;~ 			_GUI_SearchLoacal(False)
 		Case $B_UnPin
 			_modal(True,"Working...",$Gui)
 			_processLeftList($Lv_uninstallList,'unpin')
-			_GUI_SearchLoacal(False)
+;~ 			_GUI_SearchLoacal(False)
 			_modal(False,"Working...",$Gui)
 		Case $B_UbdAll	
 			_RightToLeftList($pkInstaledLIst,$Lv_uninstallList,'updAll')
