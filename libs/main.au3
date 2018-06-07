@@ -150,7 +150,7 @@ Func _getPkInfo($pkName,$localInfo = False)
 	Local $pkSite = ''
 	Local $_Summary = ''
 	Local $_Description = ''
-	Local $ChpkURL = ''
+	Local $ChpkURL = True
 	
 	if $pkName == "" Then Return
 	

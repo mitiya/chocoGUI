@@ -9,7 +9,7 @@
 Opt("GUIResizeMode", 2 + 8 + 32)  
 Opt("WinTitleMatchMode", 2)
 
-Global $_ver = '0.4.2'
+Global $_ver = '0.4.3'
 Global $_aboutTxt = 'chocoGUI v' & $_ver & @CR & 'ChocoGUI is a portable Gui for Chocolatey'
 Global $Listsfolder = @ScriptDir & "\lists"
 Global $g_idListView
